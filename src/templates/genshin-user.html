@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 1280px;
+      height: 720px;
+      max-width: 1280px;
+      max-height: 720px;
+      overflow: hidden;
+    }
+
+    body {
+      padding: 16px;
+      display: flex;
+    }
+
+    .flex {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .w-100 {
+      width: 100%;
+    }
+
+    .app-avatar {
+      height: 100px;
+      width: 100px;
+      background-color: red;
+      border-radius: 16%;
+    }
+
+    .app-character-display {
+      flex: auto 1 1;
+      display: flex;
+    }
+
+    .app-character-display-img {
+      background-color: green;
+      width: 40%;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="flex w-100">
+    <div class="flex w-100">
+      <div>
+        <img class="app-avatar" src="">
+      </div>
+      <div>
+        <div>
+          <span>{playerInfo.nickname}</span>
+          <span>{uid}</span>
+        </div>
+        <span>{playerInfo.level}</span>
+        <span>{playerInfo.worldLevel}</span>
+        <div>{playerInfo.signature}</div>
+      </div>
+    </div>
+    <div class="app-character-display flex" style="height: 85%">
+      <div class="app-character-display-img"></div>
+      <div style="height: 100%; width: 60%">
+        KEKW
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
