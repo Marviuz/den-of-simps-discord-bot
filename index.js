@@ -5,6 +5,7 @@ const {
   GatewayIntentBits,
   Collection,
 } = require('discord.js');
+const express = require('express');
 const player = require('./src/services/player');
 
 require('./src/deploy-commands');
@@ -13,7 +14,7 @@ const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
   presence: {
     status: 'online',
-    activities: [{ name: 'with Marviuz\'s ʞɔoɔ <a:ganyuGasm:901341755406946324>' }],
+    activities: [{ name: 'with Marviuz\'s ʞɔoɔ' }],
   },
 });
 
@@ -63,3 +64,17 @@ for (const file of eventFiles) {
 }
 
 client.login(process.env.DISCORD_BOT_TOKEN);
+
+//  ________   _______  _____  ______  _____ _____
+// |  ____\ \ / /  __ \|  __ \|  ____|/ ____/ ____|
+// | |__   \ V /| |__) | |__) | |__  | (___| (___
+// |  __|   > < |  ___/|  _  /|  __|  \___ \\___ \
+// | |____ / . \| |    | | \ \| |____ ____) |___) |
+// |______/_/ \_\_|    |_|  \_\______|_____/_____/
+
+const app = express();
+const port = process.env.PORT;
+app.get('*', (req, res) => {
+  res.send('Hello world');
+});
+app.listen(port, () => console.log(port));
