@@ -1,0 +1,2 @@
+exports.COIN_HEADS = '<:heads:1056680593770938408>';
+exports.COIN_TAILS = '<:tails:1056680569683062805>';

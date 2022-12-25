@@ -38,10 +38,14 @@ for (const file of commandFiles) {
 
   if ('data' in command && 'execute' in command && !command.disabled) {
     client.commands.set(command.data.name, command);
-  } else if ('legacy' in command) {
+  } else {
+    console.warn('[WARNING] `data` and `execute` not found. Not a slash command');
+  }
+
+  if ('legacy' in command) {
     client.legacyCommands[command.legacy] = command.execute;
   } else {
-    console.warn('[WARNING] `data`, `execute` and `legacy` not found. Not a command');
+    console.warn('[WARNING] `legacy` not found. Not a legacy command');
   }
 }
 
