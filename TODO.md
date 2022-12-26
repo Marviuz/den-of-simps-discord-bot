@@ -6,3 +6,4 @@
   - [ ] use case if YT video link/YT playlist is played
 
 - [ ] Genshin TCG style dice roll
+- [ ] Add logs on command usage for debugging

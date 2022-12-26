@@ -1,10 +1,11 @@
-const { SUCCESS, BLUE, DANGER } = require('../constants/colors');
-const { MAX_CHARACTERS } = require('../constants/settings');
+const { SUCCESS, DANGER } = require('../constants/colors');
+const musicQueueEmbed = require('../embeds/music-queue.embed');
 const musicEmbed = require('../embeds/music.embed');
 
 module.exports = {
   legacy: 'q',
   async execute(message) {
+    if (!message.client.player) return message.channel.send({ embeds: [{ title: 'No active queue!', color: DANGER }] });
     const queue = message.client.player.getQueue(message.guildId);
 
     if (!queue) {
@@ -21,12 +22,7 @@ module.exports = {
     return message.channel.send({
       embeds: [
         musicEmbed(queue.nowPlaying(), { color: SUCCESS, label: 'Now Playing' }),
-        {
-          title: message.guild.name,
-          description: 'Queue',
-          fields: [{ name: `${queue.tracks.length} tracks`, value: `${tracks.length > MAX_CHARACTERS ? `${tracks.slice(0, 1024 - 3)}...` : tracks}` }],
-          color: BLUE,
-        },
+        musicQueueEmbed({ title: message.guild.name }, { queue, tracks }),
       ],
     });
   },
