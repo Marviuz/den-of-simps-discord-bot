@@ -1,12 +1,14 @@
-const { DANGER } = require('../constants/colors');
+const { DANGER, INFO } = require('../constants/colors');
 const player = require('../services/player');
 
 module.exports = {
   legacy: 'p',
   async execute(message, args) {
-    if (!message.client.player) message.client.player = player(message.client);
+    if (!args.length) return message.channel.send({ embeds: [{ title: '!p <query>', color: INFO }] });
     if (!message.member.voice.channelId) return await message.channel.send({ embeds: [{ title: 'You are not in a voice channel!', color: DANGER }], ephemeral: true });
     if (message.guild.members.me.voice.channelId && message.member.voice.channelId !== message.guild.members.me.voice.channelId) await message.channel.send({ embeds: [{ title: 'You are not in my voice channel!', color: DANGER }], ephemeral: true });
+
+    if (!message.client.player) message.client.player = player(message.client);
     const query = args.join(' ');
     const queue = message.client.player.createQueue(message.guild, { metadata: { channel: message.channel } });
 
