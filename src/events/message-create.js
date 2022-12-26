@@ -12,6 +12,6 @@ module.exports = {
     const command = args.shift().toLowerCase();
 
     if (!message.client.legacyCommands[command]) return; // if command is available
-    message.client.legacyCommands[command](message, args); // TODO: await stuff
+    await message.client.legacyCommands[command](message, args);
   },
 };

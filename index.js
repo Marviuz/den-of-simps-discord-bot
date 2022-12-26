@@ -6,7 +6,6 @@ const {
   Collection,
 } = require('discord.js');
 const express = require('express');
-const player = require('./src/services/player');
 
 require('./src/deploy-commands');
 
@@ -20,7 +19,6 @@ const client = new Client({
 
 client.commands = new Collection();
 client.legacyCommands = {};
-client.player = player(client);
 
 //  _____                                           _
 // /  __ \                                         | |
