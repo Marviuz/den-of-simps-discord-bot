@@ -1,4 +1,5 @@
 const { SUCCESS, BLUE, DANGER } = require('../constants/colors');
+const { MAX_CHARACTERS } = require('../constants/settings');
 const musicEmbed = require('../embeds/music.embed');
 
 module.exports = {
@@ -23,7 +24,7 @@ module.exports = {
         {
           title: message.guild.name,
           description: 'Queue',
-          fields: [{ name: `${queue.tracks.length} tracks`, value: tracks }],
+          fields: [{ name: `${queue.tracks.length} tracks`, value: `${tracks.length > MAX_CHARACTERS ? `${tracks.slice(0, 1024 - 3)}...` : tracks}` }],
           color: BLUE,
         },
       ],
