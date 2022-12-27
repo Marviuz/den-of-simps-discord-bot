@@ -7,3 +7,4 @@
 
 - [ ] Genshin TCG style dice roll
 - [ ] Add logs on command usage for debugging
+- [ ] Add `bot tagged` commands

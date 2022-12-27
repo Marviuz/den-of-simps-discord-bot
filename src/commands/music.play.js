@@ -1,5 +1,6 @@
 const { DANGER, INFO } = require('../constants/colors');
 const player = require('../services/player');
+const log = require('../utils/log');
 
 module.exports = {
   legacy: 'p',
@@ -21,7 +22,7 @@ module.exports = {
 
     const track = await message.client.player.search(query, { requestedBy: message.member.user })
       .then((x) => x.tracks[0])
-      .catch(console.error);
+      .catch(log.error);
     if (!track) await message.channel.send({ embeds: [{ title: `Track **${query}** not found!`, color: DANGER }] });
 
     queue.addTrack(track);

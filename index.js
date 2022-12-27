@@ -6,6 +6,8 @@ const {
   Collection,
 } = require('discord.js');
 const express = require('express');
+const log = require('./src/utils/log');
+const { now } = require('./src/utils/time');
 
 require('./src/deploy-commands');
 
@@ -37,13 +39,13 @@ for (const file of commandFiles) {
   if ('data' in command && 'execute' in command && !command.disabled) {
     client.commands.set(command.data.name, command);
   } else {
-    console.warn('[WARNING] `data` and `execute` not found. Not a slash command');
+    log.warn('[WARNING] `data` and `execute` not found. Not a slash command');
   }
 
   if ('legacy' in command) {
     client.legacyCommands[command.legacy] = command.execute;
   } else {
-    console.warn('[WARNING] `legacy` not found. Not a legacy command');
+    log.warn('[WARNING] `legacy` not found. Not a legacy command');
   }
 }
 
@@ -77,6 +79,7 @@ client.login(process.env.DISCORD_BOT_TOKEN);
 const app = express();
 const port = process.env.PORT;
 app.get('*', (req, res) => {
+  log.info('Stamp:', now);
   res.send('Hello world');
 });
-app.listen(port, () => console.log(port));
+app.listen(port, () => log(port));
