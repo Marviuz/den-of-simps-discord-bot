@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, BaseInteraction } = require('discord.js');
 const { parse } = require('path');
 const { RED } = require('../constants/colors');
 const dictionaryEmbed = require('../embeds/dictionary.embed');
@@ -14,7 +14,7 @@ module.exports = {
     .setDescription('Search for a word in the dictionary')
     .addStringOption((option) => option.setName('word').setDescription('Word to search the dictionary').setRequired(true)),
   async execute(interaction, args) {
-    const input = args && args.length ? args.join(' ') : interaction.options.getString('word');
+    const input = interaction instanceof BaseInteraction ? interaction.options.getString('word') : args.join(' ');
 
     if (!input) return interaction.reply({ embeds: [{ title: 'Please add an input' }] });
 
@@ -27,9 +27,24 @@ module.exports = {
       log.error(err);
 
       if (err.response && err.response.data) {
-        await interaction.reply({ embeds: [{ title: err.response.data.title, description: err.response.data.message, color: RED }] });
+        await interaction.reply({
+          embeds: [{
+            title: err.response.data.title,
+            description: err.response.data.message,
+            color: RED,
+            footer: {
+              text: 'Powered by: https://dictionaryapi.dev/',
+              icon_url: 'https://i.imgur.com/G46QmyG.png',
+            },
+          }],
+        });
       } else {
-        await interaction.reply({ embeds: [{ title: err.message, color: RED }] });
+        await interaction.reply({
+          embeds: [{
+            title: err.message,
+            color: RED,
+          }],
+        });
       }
     }
   },
