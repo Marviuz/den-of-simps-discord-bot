@@ -23,7 +23,7 @@ module.exports = {
     const track = await message.client.player.search(query, { requestedBy: message.member.user })
       .then((x) => x.tracks[0])
       .catch(log.error);
-    if (!track) await message.channel.send({ embeds: [{ title: `Track **${query}** not found!`, color: DANGER }] });
+    if (!track) return await message.channel.send({ embeds: [{ title: `Track **${query}** not found!`, color: DANGER }] });
 
     queue.addTrack(track);
   },

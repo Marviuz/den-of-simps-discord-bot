@@ -1,2 +1,4 @@
 exports.COIN_HEADS = '<:heads:1056680593770938408>';
 exports.COIN_TAILS = '<:tails:1056680569683062805>';
+exports.WHAT_ = '<:__:1057570549682929704>';
+exports.YES_ = '<a:yes:1057575872070168676>';
