@@ -14,7 +14,7 @@ Feel free to join (_as long as you're in the right mind_)! The server mostly spe
 
 ## 💰 Support
 
-Not required but if your want... cash please 💰
+Not required but if you want... then by all means gib me ur cash please 💰 🔫
 [![Patreon](https://img.shields.io/badge/Patreon-F96854?logo=patreon&logoColor=white&style=flat-square)](https://www.patreon.com/m/Marviuz) [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?logo=ko-fi&logoColor=white&style=flat-square)](https://ko-fi.com/Marviuz/)
 
 ## 🔨 Make your own
