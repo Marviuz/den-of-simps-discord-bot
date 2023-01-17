@@ -6,10 +6,8 @@ import { IClient } from './types/client';
 import { ICommand } from './types/command';
 import { IEvent } from './types/event';
 import EventEmitter from 'events';
-import express from 'express';
 
 import './src/deploy-commands';
-import { now } from './src/utils/time';
 
 const client = new Client({
   intents: [
@@ -66,18 +64,3 @@ for (const [, event] of Object.entries(events)) {
 }
 
 client.login(process.env.DISCORD_BOT_TOKEN);
-
-//  ________   _______  _____  ______  _____ _____
-// |  ____\ \ / /  __ \|  __ \|  ____|/ ____/ ____|
-// | |__   \ V /| |__) | |__) | |__  | (___| (___
-// |  __|   > < |  ___/|  _  /|  __|  \___ \\___ \
-// | |____ / . \| |    | | \ \| |____ ____) |___) |
-// |______/_/ \_\_|    |_|  \_\______|_____/_____/
-
-const app = express();
-const port = process.env.PORT;
-app.get('*', (req, res) => {
-  log.info('Stamp:', now);
-  res.send('Hello world');
-});
-app.listen(port, () => log(port));
