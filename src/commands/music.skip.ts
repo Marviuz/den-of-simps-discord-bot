@@ -3,7 +3,7 @@ import { IClient } from '../../types/client';
 import { BLUE, DANGER } from '../constants/colors';
 import { z } from 'zod';
 
-const argumentSchema = z.number().int().min(1);
+const argumentSchema = z.nan().or(z.number().int().min(1));
 
 export default {
   legacy: 'skip',
@@ -20,7 +20,15 @@ export default {
       message.guildId as GuildResolvable
     );
 
-    if (!queue?.skip()) {
+    if (!isNaN(args.data)) {
+      if ((queue?.tracks.length || 0) < args.data)
+        return message.channel.send({
+          embeds: [{ title: 'Track number not found!', color: DANGER }],
+        });
+      if (track) return queue?.jump(args.data - 1);
+    }
+
+    if (queue?.skip() && !queue?.tracks.length)
       return message.channel.send({
         embeds: [
           {
@@ -29,6 +37,5 @@ export default {
           },
         ],
       });
-    }
   },
 };
