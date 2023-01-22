@@ -4,7 +4,6 @@
   "description": "Den of simps bot",
   "type": "module",
   "scripts": {
-    "build": "tsc --build",
     "start": "ts-node --experimental-specifier-resolution=node .",
     "start:dev": "nodemon --ext \"ts,json\" --exec ts-node --experimental-specifier-resolution=node -r dotenv/config ."
   },
