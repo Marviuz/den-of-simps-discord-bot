@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "ts-node --experimental-specifier-resolution=node .",
-    "start:dev": "nodemon --ext \"ts,json\" --exec ts-node --experimental-specifier-resolution=node -r dotenv/config ."
+    "dev": "nodemon --ext \"ts,json\" --exec ts-node --experimental-specifier-resolution=node -r dotenv/config ."
   },
   "keywords": [
     "bot",
