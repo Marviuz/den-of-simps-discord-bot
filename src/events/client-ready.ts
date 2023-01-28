@@ -33,7 +33,7 @@ export default {
         } finally {
           log.info("Name and avatar change should've finished");
         }
-      }).bind(null, parseInt(today.format('D')))
+      }).bind(null, parseInt(today().format('D')))
     );
   },
 };
