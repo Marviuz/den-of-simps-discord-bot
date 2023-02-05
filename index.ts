@@ -8,6 +8,7 @@ import { IEvent } from './types/event';
 import EventEmitter from 'events';
 
 import './src/deploy-commands';
+import { createCharacterAlterer } from './src/components/alter-charater';
 
 const client = new Client({
   intents: [
@@ -24,6 +25,9 @@ const client = new Client({
 
 client.commands = new Collection();
 client.legacyCommands = {};
+
+// Alter character per day
+createCharacterAlterer(client);
 
 //  _____                                           _
 // /  __ \                                         | |
