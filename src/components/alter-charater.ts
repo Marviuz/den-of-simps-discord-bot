@@ -17,11 +17,15 @@ export const createCharacterAlterer = (client: Client) => {
     ((date: number) => {
       const isOdd = date % 2;
 
+      log.info('Date is odd or even?', isOdd);
+
       try {
         if (isOdd) {
+          log.info('Deploying Ganyu');
           client.user?.setUsername('Ganyu');
           client.user?.setAvatar('https://i.imgur.com/Bnng7tq.png');
         } else {
+          log.info('Deploying Elysia');
           client.user?.setUsername('Elysia');
           client.user?.setAvatar('https://i.imgur.com/60hMz4x.png');
         }
