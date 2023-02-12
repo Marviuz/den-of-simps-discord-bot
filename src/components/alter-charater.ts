@@ -12,30 +12,23 @@ export const createCharacterAlterer = (client: Client) => {
   rule.minute = 0;
   rule.tz = 'Asia/Manila';
 
-  schedule.scheduleJob(
-    rule,
-    ((date: number) => {
-      const isOdd = date % 2;
-
-      log.info('Date is odd or even?', isOdd);
-
-      try {
-        if (isOdd) {
-          log.info('Deploying Ganyu');
-          client.user?.setUsername('Ganyu');
-          client.user?.setAvatar('https://i.imgur.com/Bnng7tq.png');
-        } else {
-          log.info('Deploying Elysia');
-          client.user?.setUsername('Elysia');
-          client.user?.setAvatar('https://i.imgur.com/60hMz4x.png');
-        }
-      } catch (err) {
-        log.error(err);
-      } finally {
-        log.info("Name and avatar change should've finished");
+  schedule.scheduleJob(rule, () => {
+    try {
+      if (parseInt(today().format('D')) % 2) {
+        log.info('Deploying Ganyu');
+        client.user?.setUsername('Ganyu');
+        client.user?.setAvatar('https://i.imgur.com/Bnng7tq.png');
+      } else {
+        log.info('Deploying Elysia');
+        client.user?.setUsername('Elysia');
+        client.user?.setAvatar('https://i.imgur.com/60hMz4x.png');
       }
-    }).bind(null, parseInt(today().format('D')))
-  );
+    } catch (err) {
+      log.error(err);
+    } finally {
+      log.info("Name and avatar change should've finished");
+    }
+  });
 
   log.success('Creation finished');
 };
