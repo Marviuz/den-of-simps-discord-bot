@@ -1,4 +1,4 @@
-import { ICommand } from '@/types/Command';
+import { Player } from 'discord-player';
 import {
   ApplicationCommandDataResolvable,
   Client as DiscordClient,
@@ -7,10 +7,12 @@ import {
   REST,
   Routes,
 } from 'discord.js';
+
 import * as clientCommands from '@/commands';
 import * as clientEvents from '@/events/client';
 import * as playerEvents from '@/events/player';
-import { Player } from 'discord-player';
+import { ICommand } from '@/types/Command';
+import log from '@/utils/logger';
 
 export class Client extends DiscordClient {
   commands: Collection<string, ICommand> = new Collection();
@@ -26,10 +28,6 @@ export class Client extends DiscordClient {
       ],
     });
   }
-
-  // private async registerCommands(
-  //   commands: ApplicationCommandDataResolvable[]
-  // ) {}
 
   start() {
     this.registerSlashCommands();
@@ -54,20 +52,16 @@ export class Client extends DiscordClient {
       process.env.DISCORD_BOT_TOKEN as string
     );
     try {
-      console.log(
-        `Started refreshing ${slashCommands.length} application (/) commands.`
-      );
+      log.info(`Refresing ${slashCommands.length} slash (/) commands.`);
 
       const data = (await rest.put(
         Routes.applicationCommands(process.env.DISCORD_CLIENT_ID as string),
         { body: slashCommands }
       )) as unknown[];
 
-      console.log(
-        `Successfully reloaded ${data.length} application (/) commands.`
-      );
+      log.success(`Reloaded ${data.length} slash (/) commands.`);
     } catch (error) {
-      console.error(error);
+      log.error(error);
     }
   }
 
@@ -85,7 +79,7 @@ export class Client extends DiscordClient {
    */
   async registerPlayerEvents() {
     Object.values(playerEvents).forEach(({ event, run }) => {
-      this.player.events.on(event, run);
+      this.player.events.on(event, run as never);
     });
   }
 }

@@ -1,5 +1,7 @@
-import { Awaitable, ClientEvents } from 'discord.js';
 import { GuildQueueEvents } from 'discord-player';
+import { Awaitable, ClientEvents } from 'discord.js';
+
+import { QueueMeta } from '@/types/Player';
 
 export class Event<E extends keyof ClientEvents> {
   constructor(
@@ -9,5 +11,9 @@ export class Event<E extends keyof ClientEvents> {
 }
 
 export class PlayerEvent<T extends keyof GuildQueueEvents> {
-  constructor(public event: T, public run: GuildQueueEvents[T]) {}
+  constructor(
+    public event: T,
+    public run: GuildQueueEvents<QueueMeta>[T],
+    public once?: boolean
+  ) {}
 }

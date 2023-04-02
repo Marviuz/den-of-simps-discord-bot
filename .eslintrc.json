@@ -16,6 +16,7 @@
   },
   "plugins": ["@typescript-eslint", "import"],
   "rules": {
+    "import/no-named-as-default-member": "off",
     "indent": ["error", 2],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
