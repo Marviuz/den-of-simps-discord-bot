@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "node -r dotenv/config ./build",
+    "start": "node ./build",
     "build": "rimraf ./build && tsc && tsc-alias",
     "dev": "nodemon -q -r dotenv/config -r tsconfig-paths/register ./index.ts"
   },
