@@ -1,4 +1,3 @@
-import { Client } from '@/lib/Client';
 import {
   ChatInputApplicationCommandData,
   CommandInteraction,
@@ -6,6 +5,8 @@ import {
   GuildMember,
   PermissionResolvable,
 } from 'discord.js';
+
+import { Client } from '@/lib/Client';
 
 export interface Interaction extends CommandInteraction {
   member: GuildMember;
