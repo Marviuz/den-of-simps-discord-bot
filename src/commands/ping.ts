@@ -1,11 +1,11 @@
-import { CommandInteraction, SlashCommandBuilder } from 'discord.js';
-import { parse } from 'path';
+import { Command } from '@/lib/Command';
 
-export default {
-  data: new SlashCommandBuilder()
-    .setName(parse(import.meta.url).name)
-    .setDescription('Replies with Pong!'),
-  async execute(interaction: CommandInteraction) {
-    await interaction.reply('Pong!');
+export default new Command({
+  name: 'ping',
+  description: 'ping the server',
+  run: ({ interaction, client, args }) => {
+    if (!interaction.isChatInputCommand()) return;
+
+    interaction.reply('nice');
   },
-};
+});
