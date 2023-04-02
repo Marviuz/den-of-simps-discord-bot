@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "node ./build/index.ts",
-    "build": "tsc",
+    "start": "node -r dotenv/config ./build",
+    "build": "rimraf ./build && tsc && tsc-alias",
     "dev": "nodemon -q -r dotenv/config -r tsconfig-paths/register ./index.ts"
   },
   "keywords": [],
@@ -29,7 +29,9 @@
     "eslint-import-resolver-typescript": "^3.5.4",
     "eslint-plugin-import": "^2.27.5",
     "nodemon": "^2.0.22",
+    "rimraf": "^4.4.1",
     "ts-node": "^10.9.1",
+    "tsc-alias": "^1.8.5",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.3"
   }
