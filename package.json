@@ -1,5 +1,5 @@
 {
-  "name": "db-v2",
+  "name": "@marviuz/discord-bot",
   "version": "2.0.0",
   "description": "",
   "main": "index.ts",
@@ -9,7 +9,7 @@
     "dev": "nodemon -r dotenv/config -r tsconfig-paths/register ./index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Marviuz (https://www.twitch.tv/marviuz)",
   "license": "MIT",
   "dependencies": {
     "@discordjs/opus": "^0.9.0",
