@@ -1,52 +1,32 @@
 {
-  "name": "@marviuz/den-of-simps-discord-bot",
-  "version": "2.0.4",
-  "description": "Den of simps bot",
-  "type": "module",
+  "name": "db-v2",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.ts",
   "scripts": {
-    "start": "ts-node --experimental-specifier-resolution=node .",
-    "dev": "nodemon --ext \"ts,json\" --exec ts-node --experimental-specifier-resolution=node -r dotenv/config ."
+    "start": "node ./build/index.ts",
+    "build": "tsc",
+    "dev": "nodemon -r dotenv/config -r tsconfig-paths/register ./index.ts"
   },
-  "keywords": [
-    "bot",
-    "fun"
-  ],
-  "author": "Marviuz",
-  "license": "MIT",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@discord-player/extractor": "^3.0.3",
-    "@discordjs/opus": "^0.8.0",
-    "axios": "^1.2.2",
-    "chalk": "^5.2.0",
-    "discord-player": "^5.3.2",
-    "discord.js": "^14.7.1",
+    "@discordjs/opus": "^0.9.0",
+    "discord-player": "^6.1.1",
+    "discord.js": "^14.9.0",
+    "dotenv": "^16.0.3",
     "ffmpeg-static": "^5.1.0",
-    "mathjs": "^11.5.0",
-    "moment": "^2.29.4",
-    "moment-timezone": "^0.5.40",
-    "node-schedule": "^2.1.1",
-    "zod": "^3.20.2"
+    "play-dl": "^1.9.6"
   },
   "devDependencies": {
-    "@types/node": "^18.11.18",
-    "@types/node-schedule": "^2.1.0",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "dotenv": "^16.0.3",
-    "eslint": "^8.31.0",
-    "eslint-config-standard-with-typescript": "^26.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.6.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "nodemon": "^2.0.20",
+    "@types/node": "^18.15.11",
+    "@typescript-eslint/eslint-plugin": "^5.57.0",
+    "@typescript-eslint/parser": "^5.57.0",
+    "eslint": "^8.37.0",
+    "nodemon": "^2.0.22",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Marviuz/den-of-simps-discord-bot.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Marviuz/den-of-simps-discord-bot/issues"
-  },
-  "homepage": "https://github.com/Marviuz/den-of-simps-discord-bot#readme"
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.0.3"
+  }
 }
