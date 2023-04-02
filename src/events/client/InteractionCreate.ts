@@ -1,9 +1,10 @@
-import { Event } from '@/lib/Event';
+import { CommandInteractionOptionResolver, Events } from 'discord.js';
 
 import { client } from '@/bot';
-
-import { CommandInteractionOptionResolver, Events } from 'discord.js';
+import { Event } from '@/lib/Event';
 import { Interaction } from '@/types/Command';
+import log from '@/utils/logger';
+import { info } from '@/utils/logger/theme';
 
 export default new Event(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
@@ -11,14 +12,16 @@ export default new Event(Events.InteractionCreate, async (interaction) => {
   const command = client.commands.get(interaction.commandName);
 
   if (!command) {
-    console.error(`Command ${interaction.commandName} was found`);
+    log.error(`Command ${interaction.commandName} was found`);
     return;
   }
 
+  const cmd = interaction.commandName;
+  const user = interaction.user.tag;
+  const guild = interaction.guildId;
+
   try {
-    console.log(
-      `Command **${interaction.commandName}** used by ${interaction.user.tag}`
-    );
+    log.info(`Command ${info(cmd)} used by ${info(user)} from ${info(guild)}`);
 
     await command.run({
       client,
@@ -27,10 +30,11 @@ export default new Event(Events.InteractionCreate, async (interaction) => {
     });
   } catch (error) {
     if (error instanceof Error) {
-      console.error(
-        `Command **${interaction.commandName}** used by ${interaction.user.tag}`,
+      log.error(
+        `Command ${info(cmd)} used by ${info(user)} from ${info(guild)}`,
         error
       );
+
       await interaction.reply({
         content: `There was an error while executing this command! ${error.message}`,
         ephemeral: true,

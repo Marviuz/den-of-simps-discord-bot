@@ -1,5 +1,10 @@
+import {
+  ApplicationCommandOptionType,
+  GuildResolvable,
+  GuildVoiceChannelResolvable,
+} from 'discord.js';
+
 import { Command } from '@/lib/Command';
-import { ApplicationCommandOptionType, GuildResolvable } from 'discord.js';
 
 export default new Command({
   name: 'play',
@@ -19,6 +24,9 @@ export default new Command({
     const channel = interaction.member.voice.channel;
     const guild = interaction.guild as GuildResolvable;
 
+    if (!interaction.member.voice.channel)
+      return interaction.reply('you are not in a voice channel'); // TODO: embed message
+
     await interaction.deferReply();
 
     const queue = client.player.queues.create(guild, { metadata: { channel } });
@@ -29,8 +37,10 @@ export default new Command({
 
     if (!searchResults) await interaction.followUp('track not found');
 
-    queue.addTrack(track);
+    // queue.addTrack(track);
 
-    interaction.followUp(track.title);
+    await queue.player.play(channel as GuildVoiceChannelResolvable, track);
+
+    await interaction.followUp(track.title); // TODO: embed message
   },
 });
