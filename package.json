@@ -19,6 +19,7 @@
     "dotenv": "^16.0.3",
     "ffmpeg-static": "^5.1.0",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "play-dl": "^1.9.6"
   },
   "devDependencies": {
