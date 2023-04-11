@@ -5,7 +5,7 @@ import { Command } from '@/lib/Command';
 
 export default new Command({
   name: 'queue',
-  description: 'play a song',
+  description: 'view song queues',
   run: async ({ interaction, client }) => {
     if (!interaction.isChatInputCommand()) return;
 
