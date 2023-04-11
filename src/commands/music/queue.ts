@@ -1,5 +1,6 @@
 import { GuildResolvable } from 'discord.js';
 
+import { MusicNowPlaying, MusicQueue } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 
 export default new Command({
@@ -12,11 +13,14 @@ export default new Command({
       interaction.guildId as GuildResolvable
     );
 
-    if (queue) {
+    if (queue && queue.currentTrack) {
       try {
-        return await interaction.reply(
-          `${queue.tracks.map((track) => track).length}`
-        );
+        return await interaction.reply({
+          embeds: [
+            MusicNowPlaying(queue.currentTrack),
+            MusicQueue(queue.tracks.toArray()),
+          ],
+        });
       } catch (error) {
         // TODO: notify
         if (error instanceof Error) {

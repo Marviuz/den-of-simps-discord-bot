@@ -30,15 +30,9 @@ export default new Event(Events.InteractionCreate, async (interaction) => {
     });
   } catch (error) {
     if (error instanceof Error) {
-      log.error(
-        `Command ${info(cmd)} used by ${info(user)} from ${info(guild)}`,
-        error
-      );
+      log.error(error);
 
-      await interaction.reply({
-        content: `There was an error while executing this command! ${error.message}`,
-        ephemeral: true,
-      });
+      throw error;
     }
   }
 });

@@ -16,7 +16,14 @@ import log from '@/utils/logger';
 
 export class Client extends DiscordClient {
   commands: Collection<string, ICommand> = new Collection();
-  player: Player = new Player(this);
+  player: Player = new Player(this, {
+    autoRegisterExtractor: true,
+    ytdlOptions: {
+      filter: 'audioonly',
+      quality: 'highestaudio',
+      highWaterMark: 1 << 25,
+    },
+  });
 
   constructor() {
     super({

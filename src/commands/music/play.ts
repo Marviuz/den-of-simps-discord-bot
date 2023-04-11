@@ -6,6 +6,7 @@ import {
 
 import { MusicAdd } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
+import { QueueRepeatMode } from 'discord-player';
 
 enum CommandOptions {
   Search = 'search',
@@ -27,7 +28,7 @@ export default new Command({
 
     const q = interaction.options.getString(CommandOptions.Search) as string;
     const channel = interaction.member.voice.channel;
-    const guild = interaction.guild as GuildResolvable;
+    const guild = interaction.guildId as GuildResolvable;
 
     try {
       if (!interaction.member.voice.channel)
@@ -36,31 +37,32 @@ export default new Command({
       await interaction.deferReply();
 
       const queue = client.player.queues.create(guild, {
+        repeatMode: QueueRepeatMode.AUTOPLAY,
         metadata: { channel },
       });
-      const searchResults = await client.player.search(q, {
-        requestedBy: interaction.member.user.tag,
-      });
+
+      const searchResults = await client.player.search(q);
 
       if (!searchResults.hasTracks())
         await interaction.followUp('track not found'); // TODO: embed message
 
       const track = searchResults.tracks[0];
 
-      await queue.player.play(channel as GuildVoiceChannelResolvable, track);
+      await queue.player.play(channel as GuildVoiceChannelResolvable, track, {
+        requestedBy: interaction.user,
+      });
 
       await interaction.followUp({ embeds: [MusicAdd(track)] }); // TODO: embed message
     } catch (error) {
       // TODO: notify
       if (error instanceof Error) {
-        if (!interaction.deferred) {
-          return await interaction.reply(error.message);
-        }
+        if (interaction.deferred)
+          return await interaction.followUp(error.message);
 
-        return await interaction.followUp(error.message);
+        return await interaction.reply(error.message);
       }
 
-      throw new Error('Unknown error occured');
+      throw error;
     }
   },
 });
