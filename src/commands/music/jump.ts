@@ -14,6 +14,7 @@ export default new Command({
       name: CommandOptions.TrackNumber,
       description: 'Skips to this track number',
       type: ApplicationCommandOptionType.Number,
+      required: true,
     },
   ],
   run: async ({ args, interaction, client }) => {
