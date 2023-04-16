@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./build",
     "build": "rimraf ./build && tsc && tsc-alias",
-    "dev": "nodemon -q -r dotenv/config -r tsconfig-paths/register ./index.ts"
+    "dev": "nodemon -q -r dotenv/config -r tsconfig-paths/register --experimental-modules ./index.ts"
   },
   "keywords": [],
   "author": "Marviuz (https://www.twitch.tv/marviuz)",
@@ -19,6 +19,7 @@
     "discord.js": "^14.9.0",
     "dotenv": "^16.0.3",
     "ffmpeg-static": "^5.1.0",
+    "mathjs": "^11.8.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "play-dl": "^1.9.6"
