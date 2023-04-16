@@ -1,4 +1,4 @@
-export type WaifuCategory =
+export type WaifuCategorySFW =
   | 'waifu'
   | 'neko'
   | 'shinobu'
@@ -30,3 +30,5 @@ export type WaifuCategory =
   | 'poke'
   | 'dance'
   | 'cringe';
+
+export type WaifuCategoryNSFW = 'waifu' | 'neko' | 'trap' | 'blowjob';

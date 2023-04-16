@@ -1,12 +1,15 @@
-// https:// api.waifu.pics/sfw/bonk
+// https://waifu.pics/
 
-import { WaifuCategory } from '@/types/WaifuPics';
+import { WaifuCategoryNSFW, WaifuCategorySFW } from '@/types/WaifuPics';
 import axios from 'axios';
 
-export const waifuPics = async (category: WaifuCategory, type = 'sfw') => {
+export const waifuPics = async <T>(
+  category: T extends true ? WaifuCategoryNSFW : WaifuCategorySFW,
+  nsfw?: T
+) => {
   try {
     const { data } = await axios.get(
-      `https://api.waifu.pics/${type}/${category}`
+      `https://api.waifu.pics/${nsfw ? 'nsfw' : 'sfw'}/${category}`
     );
 
     return data as { url: string };

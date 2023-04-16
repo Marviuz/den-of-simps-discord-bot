@@ -1,4 +1,5 @@
 import { waifuPics } from '@/api/waifu';
+import { Bonk } from '@/embeds/Bonk';
 import { Command } from '@/lib/Command';
 import { ApplicationCommandOptionType } from 'discord.js';
 
@@ -29,7 +30,7 @@ export default new Command({
 
       await interaction.editReply({
         content: `**Bonk ${user}!**`,
-        files: [url],
+        embeds: [Bonk(url)],
       });
     } catch (error) {
       if (error instanceof Error) {
