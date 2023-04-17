@@ -17,12 +17,7 @@ import log from '@/utils/logger';
 export class Client extends DiscordClient {
   commands: Collection<string, ICommand> = new Collection();
   player: Player = new Player(this, {
-    autoRegisterExtractor: true,
-    ytdlOptions: {
-      filter: 'audioonly',
-      quality: 'highestaudio',
-      highWaterMark: 1 << 25,
-    },
+    lockVoiceStateHandler: true,
   });
 
   constructor() {
@@ -33,6 +28,10 @@ export class Client extends DiscordClient {
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
       ],
+      presence: {
+        status: 'online',
+        activities: [{ name: "with Marviuz's ʞɔoɔ" }],
+      },
     });
   }
 
