@@ -2,6 +2,8 @@ import { ApplicationCommandOptionType } from 'discord.js';
 
 import { Command } from '@/lib/Command';
 import replyCatcher from '@/utils/replyCatcher';
+import { MusicGeneric } from '@/embeds/MusicReply';
+import { INFO, RED } from '@/constants/theme';
 
 enum CommandOptions {
   TrackNumber = 'track_number',
@@ -25,18 +27,24 @@ export default new Command({
     const tracks = queue?.tracks;
 
     try {
+      if (!interaction.member.voice.channel)
+        return await interaction.reply({
+          embeds: [MusicGeneric('You are not in my voice channel!', RED)],
+        });
+
       const track = tracks?.toArray()[trackNumber - 1];
 
       if (track) {
         queue?.node.skipTo(track);
+
         return await interaction.reply({
-          content: `Jumping to ${track.title}`,
+          embeds: [MusicGeneric(`Jumping to ${track.title}`, INFO)],
           ephemeral: true,
         });
       }
 
       return await interaction.reply({
-        content: 'Invalid track number',
+        embeds: [MusicGeneric('Invalid track number!', RED)],
         ephemeral: true,
       });
     } catch (error) {
