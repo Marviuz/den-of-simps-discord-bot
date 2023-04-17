@@ -1,6 +1,7 @@
 import { ApplicationCommandOptionType } from 'discord.js';
 
 import { Command } from '@/lib/Command';
+import replyCatcher from '@/utils/replyCatcher';
 
 enum CommandOptions {
   TrackNumber = 'track_number',
@@ -39,14 +40,7 @@ export default new Command({
         ephemeral: true,
       });
     } catch (error) {
-      if (error instanceof Error) {
-        if (interaction.deferred)
-          return await interaction.editReply(error.message);
-
-        return await interaction.reply(error.message);
-      }
-
-      throw error;
+      return await replyCatcher(interaction, error);
     }
   },
 });

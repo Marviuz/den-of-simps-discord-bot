@@ -1,4 +1,5 @@
 import { Command } from '@/lib/Command';
+import replyCatcher from '@/utils/replyCatcher';
 
 export default new Command({
   name: 'shuffle',
@@ -8,15 +9,8 @@ export default new Command({
 
     try {
       await interaction.reply('shuffled');
-    } catch (err) {
-      if (err instanceof Error) {
-        if (interaction.deferred)
-          return await interaction.editReply(err.message);
-
-        return await interaction.reply(err.message);
-      }
-
-      throw err;
+    } catch (error) {
+      return await replyCatcher(interaction, error);
     }
   },
 });

@@ -2,6 +2,7 @@ import { GuildResolvable } from 'discord.js';
 
 import { MusicNowPlaying, MusicQueue } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
+import replyCatcher from '@/utils/replyCatcher';
 
 export default new Command({
   name: 'queue',
@@ -13,28 +14,19 @@ export default new Command({
       interaction.guildId as GuildResolvable
     );
 
-    if (queue && queue.currentTrack) {
-      try {
+    try {
+      if (queue && queue.currentTrack) {
         return await interaction.reply({
           embeds: [
             MusicNowPlaying(queue.currentTrack),
             MusicQueue(queue.tracks.toArray()),
           ],
         });
-      } catch (error) {
-        // TODO: notify
-        if (error instanceof Error) {
-          if (!interaction.deferred) {
-            return await interaction.reply(error.message);
-          }
-
-          return await interaction.followUp(error.message);
-        }
-
-        throw new Error('Unknown error occured');
       }
-    }
 
-    return await interaction.reply('No queue');
+      return await interaction.reply('No queue');
+    } catch (error) {
+      return await replyCatcher(interaction, error);
+    }
   },
 });

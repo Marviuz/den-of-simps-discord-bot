@@ -1,4 +1,5 @@
 import { Command } from '@/lib/Command';
+import replyCatcher from '@/utils/replyCatcher';
 
 export default new Command({
   name: 'ping',
@@ -9,13 +10,7 @@ export default new Command({
     try {
       await interaction.reply('pong');
     } catch (error) {
-      if (error instanceof Error) {
-        if (interaction.replied) await interaction.editReply(error.message);
-
-        await interaction.reply(error.message);
-      }
-
-      throw error;
+      return await replyCatcher(interaction, error);
     }
   },
 });

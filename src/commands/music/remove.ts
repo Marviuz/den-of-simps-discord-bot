@@ -1,4 +1,5 @@
 import { Command } from '@/lib/Command';
+import replyCatcher from '@/utils/replyCatcher';
 import { ApplicationCommandOptionType } from 'discord.js';
 
 enum CommandOptions {
@@ -30,15 +31,7 @@ export default new Command({
 
       return await interaction.reply('Track not found');
     } catch (error) {
-      // TODO: notify
-      if (error instanceof Error) {
-        if (interaction.deferred)
-          return await interaction.followUp(error.message);
-
-        return await interaction.reply(error.message);
-      }
-
-      throw error;
+      return await replyCatcher(interaction, error);
     }
   },
 });

@@ -1,6 +1,7 @@
 import { waifuPics } from '@/api/waifu';
 import { Bonk } from '@/embeds/Bonk';
 import { Command } from '@/lib/Command';
+import replyCatcher from '@/utils/replyCatcher';
 import { ApplicationCommandOptionType } from 'discord.js';
 
 enum CommandOptions {
@@ -33,15 +34,7 @@ export default new Command({
         embeds: [Bonk(url)],
       });
     } catch (error) {
-      if (error instanceof Error) {
-        if (interaction.deferred) {
-          await interaction.editReply(error.message);
-        }
-
-        await interaction.reply(error.message);
-      }
-
-      throw error;
+      return await replyCatcher(interaction, error);
     }
   },
 });

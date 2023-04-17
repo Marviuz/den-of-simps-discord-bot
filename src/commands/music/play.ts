@@ -7,6 +7,7 @@ import {
 import { MusicAdd } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 import { QueueRepeatMode } from 'discord-player';
+import replyCatcher from '@/utils/replyCatcher';
 
 enum CommandOptions {
   Search = 'search',
@@ -54,15 +55,7 @@ export default new Command({
 
       await interaction.followUp({ embeds: [MusicAdd(track)] }); // TODO: embed message
     } catch (error) {
-      // TODO: notify
-      if (error instanceof Error) {
-        if (interaction.deferred)
-          return await interaction.followUp(error.message);
-
-        return await interaction.reply(error.message);
-      }
-
-      throw error;
+      return await replyCatcher(interaction, error);
     }
   },
 });

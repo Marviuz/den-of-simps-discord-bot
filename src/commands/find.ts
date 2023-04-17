@@ -1,6 +1,7 @@
 import { trace } from '@/api/trace-moe';
 import { FindResult } from '@/embeds/Find';
 import { Command } from '@/lib/Command';
+import replyCatcher from '@/utils/replyCatcher';
 import { ApplicationCommandOptionType } from 'discord.js';
 
 enum CommandOptions {
@@ -31,14 +32,7 @@ export default new Command({
 
       await interaction.editReply({ embeds });
     } catch (error) {
-      if (error instanceof Error) {
-        if (interaction.deferred || interaction.replied)
-          await interaction.editReply(error.message);
-
-        await interaction.reply(error.message);
-      }
-
-      throw error;
+      return await replyCatcher(interaction, error);
     }
   },
 });
