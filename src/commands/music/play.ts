@@ -4,10 +4,11 @@ import {
   GuildVoiceChannelResolvable,
 } from 'discord.js';
 
-import { MusicAdd } from '@/embeds/MusicReply';
+import { MusicAdd, MusicGeneric } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 import { QueueRepeatMode } from 'discord-player';
 import replyCatcher from '@/utils/replyCatcher';
+import { RED } from '@/constants/theme';
 
 enum CommandOptions {
   Search = 'search',
@@ -33,7 +34,9 @@ export default new Command({
 
     try {
       if (!interaction.member.voice.channel)
-        return await interaction.reply('you are not in a voice channel'); // TODO: embed message
+        return await interaction.reply({
+          embeds: [MusicGeneric('You are not in my voice channel!', RED)],
+        });
 
       await interaction.deferReply();
 
@@ -48,7 +51,9 @@ export default new Command({
       });
 
       if (!searchResults.hasTracks())
-        return await interaction.editReply('track not found'); // TODO: embed message
+        return await interaction.editReply({
+          embeds: [MusicGeneric(`No tracks found for ${q}`, RED)],
+        });
 
       const track = searchResults.tracks[0];
 
@@ -56,7 +61,7 @@ export default new Command({
         requestedBy: interaction.user,
       });
 
-      return await interaction.editReply({ embeds: [MusicAdd(track)] }); // TODO: embed message
+      return await interaction.editReply({ embeds: [MusicAdd(track)] });
     } catch (error) {
       return await replyCatcher(interaction, error);
     }

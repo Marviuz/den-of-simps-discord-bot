@@ -2,7 +2,7 @@ import { Track } from 'discord-player';
 import { EmbedBuilder } from 'discord.js';
 
 import { ZERO_WIDTH_SPACE } from '@/constants/characters';
-import { BLUE, GREEN } from '@/constants/theme';
+import { BLUE, GREEN, RED } from '@/constants/theme';
 
 export const MusicAdd = ({
   title,
@@ -11,8 +11,8 @@ export const MusicAdd = ({
   thumbnail,
   duration,
   requestedBy,
-}: Track) =>
-  new EmbedBuilder({
+}: Track) => {
+  return new EmbedBuilder({
     title,
     description: author,
     url,
@@ -24,6 +24,7 @@ export const MusicAdd = ({
       icon_url: requestedBy?.displayAvatarURL(),
     },
   });
+};
 
 export const MusicNowPlaying = ({
   title,
@@ -32,8 +33,8 @@ export const MusicNowPlaying = ({
   thumbnail,
   duration,
   requestedBy,
-}: Track) =>
-  new EmbedBuilder({
+}: Track) => {
+  return new EmbedBuilder({
     title,
     description: author,
     url,
@@ -45,6 +46,7 @@ export const MusicNowPlaying = ({
       icon_url: requestedBy?.displayAvatarURL(),
     },
   });
+};
 
 export const MusicQueue = (tracks: Track[]) => {
   return new EmbedBuilder({
@@ -57,5 +59,12 @@ export const MusicQueue = (tracks: Track[]) => {
         value: tracks.map((track, i) => `${i + 1}. ${track.title}`).join('\n'),
       },
     ],
+  });
+};
+
+export const MusicGeneric = (title: string, color: number) => {
+  return new EmbedBuilder({
+    title,
+    color,
   });
 };
