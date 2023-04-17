@@ -39,13 +39,16 @@ export default new Command({
 
       const queue = client.player.queues.create(guild, {
         repeatMode: QueueRepeatMode.AUTOPLAY,
+        leaveOnEmpty: false,
         metadata: { channel },
       });
 
-      const searchResults = await client.player.search(q);
+      const searchResults = await client.player.search(q, {
+        searchEngine: 'youtube', // TODO: add options to input
+      });
 
       if (!searchResults.hasTracks())
-        await interaction.followUp('track not found'); // TODO: embed message
+        return await interaction.editReply('track not found'); // TODO: embed message
 
       const track = searchResults.tracks[0];
 
@@ -53,7 +56,7 @@ export default new Command({
         requestedBy: interaction.user,
       });
 
-      await interaction.followUp({ embeds: [MusicAdd(track)] }); // TODO: embed message
+      return await interaction.editReply({ embeds: [MusicAdd(track)] }); // TODO: embed message
     } catch (error) {
       return await replyCatcher(interaction, error);
     }
