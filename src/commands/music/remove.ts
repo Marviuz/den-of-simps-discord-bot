@@ -1,5 +1,4 @@
 import { Command } from '@/lib/Command';
-import replyCatcher from '@/utils/replyCatcher';
 import { ApplicationCommandOptionType } from 'discord.js';
 
 enum CommandOptions {
@@ -23,15 +22,11 @@ export default new Command({
 
     const trackToDelete = queue?.tracks.toArray()[trackNumber - 1];
 
-    try {
-      if (trackToDelete) {
-        queue.removeTrack(trackToDelete);
-        return await interaction.reply(`Deleted ${trackToDelete.title}`);
-      }
-
-      return await interaction.reply('Track not found');
-    } catch (error) {
-      return await replyCatcher(interaction, error);
+    if (trackToDelete) {
+      queue.removeTrack(trackToDelete);
+      return await interaction.reply(`Deleted ${trackToDelete.title}`);
     }
+
+    return await interaction.reply('Track not found');
   },
 });

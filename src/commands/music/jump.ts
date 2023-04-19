@@ -1,7 +1,6 @@
 import { ApplicationCommandOptionType } from 'discord.js';
 
 import { Command } from '@/lib/Command';
-import replyCatcher from '@/utils/replyCatcher';
 import { MusicGeneric } from '@/embeds/MusicReply';
 import { INFO, RED } from '@/constants/theme';
 
@@ -26,29 +25,25 @@ export default new Command({
     const queue = client.player.queues.get(interaction.guildId!);
     const tracks = queue?.tracks;
 
-    try {
-      if (!interaction.member.voice.channel)
-        return await interaction.reply({
-          embeds: [MusicGeneric('You are not in my voice channel!', RED)],
-        });
+    if (!interaction.member.voice.channel)
+      return await interaction.reply({
+        embeds: [MusicGeneric('You are not in my voice channel!', RED)],
+      });
 
-      const track = tracks?.toArray()[trackNumber - 1];
+    const track = tracks?.toArray()[trackNumber - 1];
 
-      if (track) {
-        queue?.node.skipTo(track);
-
-        return await interaction.reply({
-          embeds: [MusicGeneric(`Jumping to ${track.title}`, INFO)],
-          ephemeral: true,
-        });
-      }
+    if (track) {
+      queue?.node.skipTo(track);
 
       return await interaction.reply({
-        embeds: [MusicGeneric('Invalid track number!', RED)],
+        embeds: [MusicGeneric(`Jumping to ${track.title}`, INFO)],
         ephemeral: true,
       });
-    } catch (error) {
-      return await replyCatcher(interaction, error);
     }
+
+    return await interaction.reply({
+      embeds: [MusicGeneric('Invalid track number!', RED)],
+      ephemeral: true,
+    });
   },
 });

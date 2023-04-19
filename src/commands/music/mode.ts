@@ -1,5 +1,4 @@
 import { Command } from '@/lib/Command';
-import replyCatcher from '@/utils/replyCatcher';
 import { QueueRepeatMode } from 'discord-player';
 import {
   ApplicationCommandOptionChoiceData,
@@ -37,10 +36,6 @@ export default new Command({
 
     queue?.setRepeatMode(mode);
 
-    try {
-      await interaction.reply(`Set repeat mode to ${mode}`);
-    } catch (error) {
-      return await replyCatcher(interaction, error);
-    }
+    await interaction.reply(`Set repeat mode to ${mode}`);
   },
 });

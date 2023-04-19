@@ -7,7 +7,6 @@ import {
 import { MusicAdd, MusicGeneric } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 import { QueueRepeatMode } from 'discord-player';
-import replyCatcher from '@/utils/replyCatcher';
 import { RED } from '@/constants/theme';
 
 enum CommandOptions {
@@ -32,38 +31,34 @@ export default new Command({
     const channel = interaction.member.voice.channel;
     const guild = interaction.guildId as GuildResolvable;
 
-    try {
-      if (!interaction.member.voice.channel)
-        return await interaction.reply({
-          embeds: [MusicGeneric('You are not in my voice channel!', RED)],
-        });
-
-      await interaction.deferReply();
-
-      const queue = client.player.queues.create(guild, {
-        repeatMode: QueueRepeatMode.AUTOPLAY,
-        leaveOnEmpty: false,
-        metadata: { channel },
+    if (!interaction.member.voice.channel)
+      return await interaction.reply({
+        embeds: [MusicGeneric('You are not in my voice channel!', RED)],
       });
 
-      const searchResults = await client.player.search(q, {
-        searchEngine: 'youtube', // TODO: add options to input
+    await interaction.deferReply();
+
+    const queue = client.player.queues.create(guild, {
+      repeatMode: QueueRepeatMode.AUTOPLAY,
+      leaveOnEmpty: false,
+      metadata: { channel },
+    });
+
+    const searchResults = await client.player.search(q, {
+      searchEngine: 'youtube', // TODO: add options to input
+    });
+
+    if (!searchResults.hasTracks())
+      return await interaction.editReply({
+        embeds: [MusicGeneric(`No tracks found for ${q}`, RED)],
       });
 
-      if (!searchResults.hasTracks())
-        return await interaction.editReply({
-          embeds: [MusicGeneric(`No tracks found for ${q}`, RED)],
-        });
+    const track = searchResults.tracks[0];
 
-      const track = searchResults.tracks[0];
+    await queue.player.play(channel as GuildVoiceChannelResolvable, track, {
+      requestedBy: interaction.user,
+    });
 
-      await queue.player.play(channel as GuildVoiceChannelResolvable, track, {
-        requestedBy: interaction.user,
-      });
-
-      return await interaction.editReply({ embeds: [MusicAdd(track)] });
-    } catch (error) {
-      return await replyCatcher(interaction, error);
-    }
+    return await interaction.editReply({ embeds: [MusicAdd(track)] });
   },
 });

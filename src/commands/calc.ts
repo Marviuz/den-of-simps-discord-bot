@@ -1,5 +1,4 @@
 import { Command } from '@/lib/Command';
-import replyCatcher from '@/utils/replyCatcher';
 import { ApplicationCommandOptionType } from 'discord.js';
 import * as mathjs from 'mathjs';
 
@@ -23,10 +22,6 @@ export default new Command({
 
     const equation = args.getString(CommandOptions.Equation)!;
 
-    try {
-      await interaction.reply(`The answer is ${mathjs.evaluate(equation)}`);
-    } catch (error) {
-      return await replyCatcher(interaction, error);
-    }
+    await interaction.reply(`The answer is ${mathjs.evaluate(equation)}`);
   },
 });

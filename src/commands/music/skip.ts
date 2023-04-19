@@ -1,7 +1,6 @@
 import { GuildResolvable } from 'discord.js';
 
 import { Command } from '@/lib/Command';
-import replyCatcher from '@/utils/replyCatcher';
 
 export default new Command({
   name: 'skip',
@@ -15,10 +14,6 @@ export default new Command({
 
     queue?.node.skip();
 
-    try {
-      await interaction.reply({ content: 'skipping...', ephemeral: true });
-    } catch (error) {
-      return await replyCatcher(interaction, error);
-    }
+    await interaction.reply({ content: 'skipping...', ephemeral: true });
   },
 });

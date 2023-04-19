@@ -30,9 +30,12 @@ export default new Event(Events.InteractionCreate, async (interaction) => {
     });
   } catch (error) {
     if (error instanceof Error) {
-      log.error(error);
+      if (interaction.deferred || interaction.replied)
+        await interaction.editReply(error.message); // TODO: make embed
 
-      throw error;
+      await interaction.reply(error.message); // TODO: make embed
     }
+
+    throw error;
   }
 });

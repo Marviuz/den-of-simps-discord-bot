@@ -1,5 +1,4 @@
 import { Command } from '@/lib/Command';
-import replyCatcher from '@/utils/replyCatcher';
 
 export default new Command({
   name: 'shuffle',
@@ -7,10 +6,6 @@ export default new Command({
   run: async ({ interaction, client }) => {
     client.player.queues.get(interaction.guild!)?.tracks.shuffle();
 
-    try {
-      await interaction.reply('shuffled');
-    } catch (error) {
-      return await replyCatcher(interaction, error);
-    }
+    await interaction.reply('shuffled');
   },
 });

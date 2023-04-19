@@ -1,7 +1,6 @@
 import { trace } from '@/api/trace-moe';
 import { FindResult } from '@/embeds/Find';
 import { Command } from '@/lib/Command';
-import replyCatcher from '@/utils/replyCatcher';
 import { ApplicationCommandOptionType } from 'discord.js';
 
 enum CommandOptions {
@@ -19,20 +18,16 @@ export default new Command({
       required: true,
     },
   ],
-  run: async ({ client, args, interaction }) => {
+  run: async ({ args, interaction }) => {
     if (!interaction.isChatInputCommand()) return;
 
     const { url } = args.getAttachment(CommandOptions.Image)!;
 
-    try {
-      await interaction.deferReply();
+    await interaction.deferReply();
 
-      const { result } = await trace(url);
-      const embeds = result.map((res) => FindResult(res));
+    const { result } = await trace(url);
+    const embeds = result.map((res) => FindResult(res));
 
-      await interaction.editReply({ embeds });
-    } catch (error) {
-      return await replyCatcher(interaction, error);
-    }
+    await interaction.editReply({ embeds });
   },
 });
