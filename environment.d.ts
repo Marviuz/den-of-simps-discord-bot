@@ -8,6 +8,8 @@ declare global {
       DISCORD_CLIENT_SECRET: string;
       NODE_ENV: string;
       APP_TZ: string;
+      RAPID_API_KEY: string;
+      RAPID_API_HOST: string;
     }
   }
 }
