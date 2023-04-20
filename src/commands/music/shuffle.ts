@@ -12,7 +12,14 @@ export default new Command({
         embeds: [MusicGeneric('You are not in my voice channel!', RED)],
       });
 
-    client.player.queues.get(interaction.guild!)?.tracks.shuffle();
+    const queue = client.player.queues.get(interaction.guild!);
+
+    if (!queue)
+      return await interaction.reply({
+        embeds: [MusicGeneric('There is no queue', RED)],
+      });
+
+    queue.tracks.shuffle();
 
     await interaction.reply({
       embeds: [MusicGeneric('Shuffled', GREEN)],

@@ -29,6 +29,12 @@ export default new Command({
     const trackNumber = args.getNumber(CommandOptions.TrackNumber)!;
 
     const queue = client.player.queues.get(interaction.guildId!);
+
+    if (!queue)
+      return await interaction.reply({
+        embeds: [MusicGeneric('There is no queue', RED)],
+      });
+
     const tracks = queue?.tracks;
 
     if (!interaction.member.voice.channel)

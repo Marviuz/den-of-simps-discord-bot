@@ -20,7 +20,12 @@ export default new Command({
       interaction.guildId as GuildResolvable
     );
 
-    if (queue && queue.currentTrack) {
+    if (!queue)
+      return await interaction.reply({
+        embeds: [MusicGeneric('There is no queue', RED)],
+      });
+
+    if (queue.currentTrack) {
       return await interaction.reply({
         embeds: [
           MusicNowPlaying(queue.currentTrack),
@@ -28,7 +33,5 @@ export default new Command({
         ],
       });
     }
-
-    return await interaction.reply('No queue');
   },
 });
