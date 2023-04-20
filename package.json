@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./build",
     "build": "rimraf ./build && tsc && tsc-alias",
-    "dev": "nodemon -q -r dotenv/config -r tsconfig-paths/register ./index.ts"
+    "dev": "nodemon -r dotenv/config -r tsconfig-paths/register ./index.ts"
   },
   "keywords": [],
   "author": "Marviuz (https://www.twitch.tv/marviuz)",
