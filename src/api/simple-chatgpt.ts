@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const AskGPT = async (question: string) => {
   try {
-    const { data } = await axios.post(
+    const { data, headers } = await axios.post(
       'https://simple-chatgpt-api.p.rapidapi.com/ask',
       {
         question,
@@ -16,7 +16,14 @@ export const AskGPT = async (question: string) => {
       }
     );
 
-    return data as { answer: string };
+    const limit = parseInt(headers['x-ratelimit-requests-limit']);
+    const remaining = parseInt(headers['x-ratelimit-requests-remaining']);
+
+    return { limit, remaining, ...data } as {
+      answer: string;
+      limit: number;
+      remaining: string;
+    };
   } catch (error) {
     throw error;
   }
