@@ -2,20 +2,20 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@discord-player/extractor':
-    specifier: ^4.1.2
-    version: 4.1.2(play-dl@1.9.6)(ytdl-core@4.11.4)
+    specifier: ^4.2.1
+    version: 4.2.1
   '@discordjs/opus':
     specifier: ^0.9.0
     version: 0.9.0
   axios:
-    specifier: ^1.3.5
-    version: 1.3.5
+    specifier: ^1.3.6
+    version: 1.3.6
   chalk:
     specifier: ^4.1.2
     version: 4.1.2
   discord-player:
-    specifier: ^6.1.1
-    version: 6.1.1(@discord-player/extractor@4.1.2)(@discordjs/opus@0.9.0)(discord.js@14.9.0)(ffmpeg-static@5.1.0)(youtube-sr@4.3.4)
+    specifier: ^6.2.1
+    version: 6.2.1(@discord-player/extractor@4.2.1)(@discordjs/opus@0.9.0)(discord.js@14.9.0)(ffmpeg-static@5.1.0)(youtube-sr@4.3.4)
   discord.js:
     specifier: ^14.9.0
     version: 14.9.0
@@ -40,8 +40,8 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: ^18.15.11
-    version: 18.15.11
+    specifier: ^18.15.12
+    version: 18.15.12
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.59.0
     version: 5.59.0(@typescript-eslint/parser@5.59.0)(eslint@8.38.0)(typescript@5.0.4)
@@ -65,7 +65,7 @@ devDependencies:
     version: 4.4.1
   ts-node:
     specifier: ^10.9.1
-    version: 10.9.1(@types/node@18.15.11)(typescript@5.0.4)
+    version: 10.9.1(@types/node@18.15.12)(typescript@5.0.4)
   tsc-alias:
     specifier: ^1.8.5
     version: 1.8.5
@@ -106,21 +106,16 @@ packages:
     resolution: {integrity: sha512-PPjX8TBwzM85YKEdpYYL8aGbdSLIk9RK1h/uU5jeyiF6Uu5CiLH/XctDfcGW8cSgoaU4J0R6a8svCs9yhzHXSw==}
     dev: false
 
-  /@discord-player/extractor@4.1.2(play-dl@1.9.6)(ytdl-core@4.11.4):
-    resolution: {integrity: sha512-sG0KG3tC9/t2hnzXP7amaURbZ+7KfIXma+sH2UyAJKqX3LgYnFvUxm1deL29lPrqf8wjR9XEEOt5TOxpsyP74Q==}
-    peerDependencies:
-      play-dl: 1.x
-      ytdl-core: 4.x
+  /@discord-player/extractor@4.2.1:
+    resolution: {integrity: sha512-z1kqIyAteD5H22KE/VTuujdXq4D+lV9owv6SmpmoS1R/ss+skTCOe/jReHlQC2HBNo5flShgEzMDqtp/HxI7cA==}
     dependencies:
       file-type: 16.5.4
       genius-lyrics: 4.4.3
       node-html-parser: 6.1.5
-      play-dl: 1.9.6
       reverbnation-scraper: 2.0.0
       soundcloud-scraper: 5.0.3
       spotify-url-info: 3.2.3
       youtube-sr: 4.3.4
-      ytdl-core: 4.11.4
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -379,8 +374,8 @@ packages:
     resolution: {integrity: sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==}
     dev: false
 
-  /@types/node@18.15.11:
-    resolution: {integrity: sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==}
+  /@types/node@18.15.12:
+    resolution: {integrity: sha512-Wha1UwsB3CYdqUm2PPzh/1gujGCNtWVUYF0mB00fJFoR4gTyWTDPjSm+zBF787Ahw8vSGgBja90MkgFwvB86Dg==}
 
   /@types/semver@7.3.13:
     resolution: {integrity: sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw==}
@@ -389,7 +384,7 @@ packages:
   /@types/ws@8.5.4:
     resolution: {integrity: sha512-zdQDHKUgcX/zBc4GrwsE/7dVdAD8JR4EuiAXiiUhhfyIJXXb2+PrGshFyeXWQPMmmZ2XxgaqclgpIC7eTXc1mg==}
     dependencies:
-      '@types/node': 18.15.11
+      '@types/node': 18.15.12
     dev: false
 
   /@typescript-eslint/eslint-plugin@5.59.0(@typescript-eslint/parser@5.59.0)(eslint@8.38.0)(typescript@5.0.4):
@@ -652,8 +647,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /axios@1.3.5:
-    resolution: {integrity: sha512-glL/PvG/E+xCWwV8S6nCHcrfg1exGx7vxyUIivIA1iL7BIh6bePylCfVHwp6k13ao7SATxB6imau2kqY+I67kw==}
+  /axios@1.3.6:
+    resolution: {integrity: sha512-PEcdkk7JcdPiMDkvM4K6ZBRYq9keuVJsToxm2zQIM70Qqo2WHTdJZMXcG9X+RmRp2VPNUQC8W1RAGbgt6b1yMg==}
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
@@ -920,15 +915,15 @@ packages:
     resolution: {integrity: sha512-hkhQsQyzsTJITp311WXvHZh9j4RAMfIk2hPmsWeOTN50QTpg6zqmJNfel9D/8lYNvsU01wzw9281Yke8NhYyHg==}
     dev: false
 
-  /discord-player@6.1.1(@discord-player/extractor@4.1.2)(@discordjs/opus@0.9.0)(discord.js@14.9.0)(ffmpeg-static@5.1.0)(youtube-sr@4.3.4):
-    resolution: {integrity: sha512-gIN0V+IBT1xcLmzFqfbq9pM8B7crZvbfTwdey1R99P3DdAfaRbg+F1hw9l5ftK2X492O3uAjev+ZBh1CcFU3pQ==}
+  /discord-player@6.2.1(@discord-player/extractor@4.2.1)(@discordjs/opus@0.9.0)(discord.js@14.9.0)(ffmpeg-static@5.1.0)(youtube-sr@4.3.4):
+    resolution: {integrity: sha512-+uFetp3GPeOH5GARJdnLuT0LeiCV9dLLNZ1wnEpMltxIsxqOMIMUFKr+C1Pgajss3mhyeB7lGjpnZvNAi3Ti+A==}
     peerDependencies:
       '@discord-player/extractor': '*'
       discord.js: 14.x
       youtube-sr: 4.x
     dependencies:
       '@discord-player/equalizer': 0.2.1
-      '@discord-player/extractor': 4.1.2(play-dl@1.9.6)(ytdl-core@4.11.4)
+      '@discord-player/extractor': 4.2.1
       '@discord-player/utils': 0.2.1
       '@discordjs/voice': 0.16.0(@discordjs/opus@0.9.0)(ffmpeg-static@5.1.0)
       discord.js: 14.9.0
@@ -1015,8 +1010,8 @@ packages:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
     dev: false
 
-  /enhanced-resolve@5.12.0:
-    resolution: {integrity: sha512-QHTXI/sZQmko1cbDoNAa3mJ5qhWUUNAq3vR0/YiD379fWQrcfuoX1+HW2S0MTt7XmoPLapdaDKUtelUSPic7hQ==}
+  /enhanced-resolve@5.13.0:
+    resolution: {integrity: sha512-eyV8f0y1+bzyfh8xAwW/WTSZpLbjhqc4ne9eGSH4Zo2ejdyiNG9pU6mf9DG8a7+Auk6MFTlNOT4Y2y/9k8GKVg==}
     engines: {node: '>=10.13.0'}
     dependencies:
       graceful-fs: 4.2.11
@@ -1063,7 +1058,7 @@ packages:
       object-inspect: 1.12.3
       object-keys: 1.1.1
       object.assign: 4.1.4
-      regexp.prototype.flags: 1.4.3
+      regexp.prototype.flags: 1.5.0
       safe-regex-test: 1.0.0
       string.prototype.trim: 1.2.7
       string.prototype.trimend: 1.0.6
@@ -1124,7 +1119,7 @@ packages:
       eslint-plugin-import: '*'
     dependencies:
       debug: 4.3.4
-      enhanced-resolve: 5.12.0
+      enhanced-resolve: 5.13.0
       eslint: 8.38.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-node@0.3.7)(eslint-import-resolver-typescript@3.5.5)(eslint@8.38.0)
       eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.38.0)
@@ -1956,8 +1951,8 @@ packages:
     dependencies:
       yallist: 4.0.0
 
-  /lru-cache@9.0.3:
-    resolution: {integrity: sha512-cyjNRew29d4kbgnz1sjDqxg7qg8NW4s+HQzCGjeon7DV5T2yDije16W9HaUFV1dhVEMh+SjrOcK0TomBmf3Egg==}
+  /lru-cache@9.1.0:
+    resolution: {integrity: sha512-qFXQEwchrZcMVen2uIDceR8Tii6kCJak5rzDStfEM0qA3YLMswaxIEZO0DhIbJ3aqaJiDjt+3crlplOb0tDtKQ==}
     engines: {node: 14 || >=16.14}
     dev: true
 
@@ -2296,7 +2291,7 @@ packages:
     resolution: {integrity: sha512-UkZUeDjczjYRE495+9thsgcVgsaCPkaw80slmfVFgllxY+IO8ubTsOpFVjDPROBqJdHfVPUFRHPBV/WciOVfWg==}
     engines: {node: '>=16 || 14 >=14.17'}
     dependencies:
-      lru-cache: 9.0.3
+      lru-cache: 9.1.0
       minipass: 5.0.0
     dev: true
 
@@ -2420,8 +2415,8 @@ packages:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
     dev: false
 
-  /regexp.prototype.flags@1.4.3:
-    resolution: {integrity: sha512-fjggEOO3slI6Wvgjwflkc4NFRCTZAu5CnNfBd5qOMYhWdn67nJBBu34/TkD++eeFmd8C9r9jfXJ27+nSiRkSUA==}
+  /regexp.prototype.flags@1.5.0:
+    resolution: {integrity: sha512-0SutC3pNudRKgquxGoRGIz946MZVHqbNfPjBdxeOhBrdgDKlRoXmYLQN9xRbrR09ZXWeGAdPuif7egofn6v5LA==}
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.2
@@ -2758,7 +2753,7 @@ packages:
     resolution: {integrity: sha512-k43M7uCG1AkTyxgnmI5MPwKoUvS/bRvLvUb7+Pgpdlmok8AoqmUaZxUUw8zKM5B1lqZrt41GjYgnvAi0fppqgQ==}
     dev: false
 
-  /ts-node@10.9.1(@types/node@18.15.11)(typescript@5.0.4):
+  /ts-node@10.9.1(@types/node@18.15.12)(typescript@5.0.4):
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -2777,7 +2772,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.15.11
+      '@types/node': 18.15.12
       acorn: 8.8.2
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -2988,13 +2983,4 @@ packages:
 
   /youtube-sr@4.3.4:
     resolution: {integrity: sha512-olSYcR80XigutCrePEXBX3/RJJrWfonJQj7+/ggBiWU0CzTDLE1q8+lpWTWCG0JpzhzILp/IB/Bq/glGqqr1TQ==}
-    dev: false
-
-  /ytdl-core@4.11.4:
-    resolution: {integrity: sha512-tsVvqt++B5LSTMnCKQb4H/PFBewKj7gGPJ6KIM5gOFGMKNZj4qglGAl4QGFG8cNPP6wY54P80FDID5eN2di0GQ==}
-    engines: {node: '>=12'}
-    dependencies:
-      m3u8stream: 0.8.6
-      miniget: 4.2.2
-      sax: 1.2.4
     dev: false
