@@ -1,6 +1,5 @@
-import { TextBasedChannel, VoiceBasedChannel } from 'discord.js';
+import { Interaction } from './Command';
 
 export type QueueMeta = {
-  voiceChannel: VoiceBasedChannel;
-  textChannel: TextBasedChannel;
+  interaction: Interaction;
 };

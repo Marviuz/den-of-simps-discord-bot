@@ -24,12 +24,11 @@ export default new Command({
       type: ApplicationCommandOptionType.String,
     },
   ],
-  run: async ({ interaction, client }) => {
+  run: async ({ interaction, client, args }) => {
     if (!interaction.isChatInputCommand()) return;
 
-    const q = interaction.options.getString(CommandOptions.Search) as string;
+    const q = args.getString(CommandOptions.Search)!;
     const voiceChannel = interaction.member.voice.channel;
-    const textChannel = interaction.channel;
     const guild = interaction.guildId as GuildResolvable;
 
     if (!interaction.member.voice.channel)
@@ -42,7 +41,7 @@ export default new Command({
     const queue = client.player.queues.create(guild, {
       repeatMode: QueueRepeatMode.AUTOPLAY,
       leaveOnEmpty: false,
-      metadata: { textChannel, voiceChannel },
+      metadata: { interaction },
     });
 
     const searchResults = await client.player.search(q, {
