@@ -1,4 +1,4 @@
-import { RED } from '@/constants/theme';
+import { RED, WARNING } from '@/constants/theme';
 import { MusicGeneric } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 import { ApplicationCommandOptionType } from 'discord.js';
@@ -32,9 +32,13 @@ export default new Command({
 
     if (trackToDelete) {
       queue.removeTrack(trackToDelete);
-      return await interaction.reply(`Deleted ${trackToDelete.title}`);
+      return await interaction.reply({
+        embeds: [MusicGeneric(`Removed ${trackToDelete.title}`, WARNING)],
+      });
     }
 
-    return await interaction.reply('Track not found');
+    return await interaction.reply({
+      embeds: [MusicGeneric('Track not found!', RED)],
+    });
   },
 });

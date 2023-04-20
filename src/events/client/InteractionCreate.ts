@@ -5,6 +5,7 @@ import { Event } from '@/lib/Event';
 import { Interaction } from '@/types/Command';
 import log from '@/utils/logger';
 import { info } from '@/utils/logger/theme';
+import { ErrorEmbed } from '@/embeds/Error';
 
 export default new Event(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
@@ -31,9 +32,9 @@ export default new Event(Events.InteractionCreate, async (interaction) => {
   } catch (error) {
     if (error instanceof Error) {
       if (interaction.deferred || interaction.replied)
-        await interaction.editReply(error.message); // TODO: make embed
+        await interaction.editReply({ embeds: [ErrorEmbed(error.message)] });
 
-      await interaction.reply(error.message); // TODO: make embed
+      await interaction.reply({ embeds: [ErrorEmbed(error.message)] });
     }
 
     throw error;

@@ -2,7 +2,7 @@ import { GuildResolvable } from 'discord.js';
 
 import { Command } from '@/lib/Command';
 import { MusicGeneric } from '@/embeds/MusicReply';
-import { RED } from '@/constants/theme';
+import { INFO, RED } from '@/constants/theme';
 
 export default new Command({
   name: 'skip',
@@ -22,6 +22,9 @@ export default new Command({
 
     queue?.node.skip();
 
-    await interaction.reply({ content: 'skipping...', ephemeral: true });
+    await interaction.reply({
+      embeds: [MusicGeneric('skipping...', INFO)],
+      ephemeral: true,
+    });
   },
 });

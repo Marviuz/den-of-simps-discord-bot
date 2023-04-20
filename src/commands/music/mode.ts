@@ -1,4 +1,4 @@
-import { RED } from '@/constants/theme';
+import { INFO, RED } from '@/constants/theme';
 import { MusicGeneric } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 import { QueueRepeatMode } from 'discord-player';
@@ -44,6 +44,15 @@ export default new Command({
 
     queue?.setRepeatMode(mode);
 
-    await interaction.reply(`Set repeat mode to ${mode}`);
+    await interaction.reply({
+      embeds: [
+        MusicGeneric(
+          `Set repeat mode to ${
+            choices.find(({ value }) => value === mode)?.name
+          }`,
+          INFO
+        ),
+      ],
+    });
   },
 });

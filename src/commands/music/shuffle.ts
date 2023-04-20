@@ -1,4 +1,4 @@
-import { RED } from '@/constants/theme';
+import { GREEN, RED } from '@/constants/theme';
 import { MusicGeneric } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 
@@ -14,6 +14,8 @@ export default new Command({
 
     client.player.queues.get(interaction.guild!)?.tracks.shuffle();
 
-    await interaction.reply('shuffled');
+    await interaction.reply({
+      embeds: [MusicGeneric('Shuffled', GREEN)],
+    });
   },
 });
