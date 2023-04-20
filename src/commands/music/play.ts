@@ -4,7 +4,7 @@ import {
   GuildVoiceChannelResolvable,
 } from 'discord.js';
 
-import { MusicAdd, MusicGeneric } from '@/embeds/MusicReply';
+import { MusicQueueing, MusicGeneric } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 import { QueueRepeatMode } from 'discord-player';
 import { RED } from '@/constants/theme';
@@ -28,7 +28,8 @@ export default new Command({
     if (!interaction.isChatInputCommand()) return;
 
     const q = interaction.options.getString(CommandOptions.Search) as string;
-    const channel = interaction.member.voice.channel;
+    const voiceChannel = interaction.member.voice.channel;
+    const textChannel = interaction.channel;
     const guild = interaction.guildId as GuildResolvable;
 
     if (!interaction.member.voice.channel)
@@ -41,7 +42,7 @@ export default new Command({
     const queue = client.player.queues.create(guild, {
       repeatMode: QueueRepeatMode.AUTOPLAY,
       leaveOnEmpty: false,
-      metadata: { channel },
+      metadata: { textChannel, voiceChannel },
     });
 
     const searchResults = await client.player.search(q, {
@@ -55,10 +56,14 @@ export default new Command({
 
     const track = searchResults.tracks[0];
 
-    await queue.player.play(channel as GuildVoiceChannelResolvable, track, {
-      requestedBy: interaction.user,
-    });
+    await queue.player.play(
+      voiceChannel as GuildVoiceChannelResolvable,
+      track,
+      {
+        requestedBy: interaction.user,
+      }
+    );
 
-    return await interaction.editReply({ embeds: [MusicAdd(track)] });
+    return await interaction.editReply({ embeds: [MusicQueueing(track)] });
   },
 });

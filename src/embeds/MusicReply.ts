@@ -2,9 +2,31 @@ import { Track } from 'discord-player';
 import { EmbedBuilder } from 'discord.js';
 
 import { ZERO_WIDTH_SPACE } from '@/constants/characters';
-import { BLUE, GREEN, RED } from '@/constants/theme';
+import { BLUE, GREEN, SUCCESS } from '@/constants/theme';
 
 export const MusicAdd = ({
+  title,
+  author,
+  url,
+  thumbnail,
+  duration,
+  requestedBy,
+}: Track) => {
+  return new EmbedBuilder({
+    title,
+    description: author,
+    url,
+    color: SUCCESS,
+    thumbnail: { url: thumbnail },
+    fields: [{ name: 'Added', value: duration }],
+    footer: {
+      text: `Requested by: ${requestedBy?.tag}`,
+      icon_url: requestedBy?.displayAvatarURL(),
+    },
+  });
+};
+
+export const MusicQueueing = ({
   title,
   author,
   url,
@@ -42,7 +64,7 @@ export const MusicNowPlaying = ({
     thumbnail: { url: thumbnail },
     fields: [{ name: 'Playing', value: duration }],
     footer: {
-      text: `Requested by: ${requestedBy}`,
+      text: `Requested by: ${requestedBy?.tag}`,
       icon_url: requestedBy?.displayAvatarURL(),
     },
   });

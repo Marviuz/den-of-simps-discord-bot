@@ -1,5 +1,6 @@
-import { GuildVoiceChannelResolvable } from 'discord.js';
+import { TextBasedChannel, VoiceBasedChannel } from 'discord.js';
 
 export type QueueMeta = {
-  channel: GuildVoiceChannelResolvable;
+  voiceChannel: VoiceBasedChannel;
+  textChannel: TextBasedChannel;
 };
