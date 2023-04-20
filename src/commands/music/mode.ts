@@ -1,3 +1,5 @@
+import { RED } from '@/constants/theme';
+import { MusicGeneric } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 import { QueueRepeatMode } from 'discord-player';
 import {
@@ -30,6 +32,12 @@ export default new Command({
   ],
   run: async ({ interaction, client, args }) => {
     if (!interaction.isChatInputCommand()) return;
+
+    // Guard: must be in VC
+    if (!interaction.member.voice.channel)
+      return await interaction.reply({
+        embeds: [MusicGeneric('You are not in my voice channel!', RED)],
+      });
 
     const mode = args.getNumber(CommandOptions.Mode) as QueueRepeatMode;
     const queue = client.player.queues.get(interaction.guildId!);

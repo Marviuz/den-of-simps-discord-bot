@@ -31,6 +31,7 @@ export default new Command({
     const voiceChannel = interaction.member.voice.channel;
     const guild = interaction.guildId as GuildResolvable;
 
+    // Guard: must be in VC
     if (!interaction.member.voice.channel)
       return await interaction.reply({
         embeds: [MusicGeneric('You are not in my voice channel!', RED)],
