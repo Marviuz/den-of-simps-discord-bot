@@ -2,14 +2,10 @@ import { Events } from 'discord.js';
 
 import { Event } from '@/lib/Event';
 import { AskGPT } from '@/api/simple-chatgpt';
-import log from '@/utils/logger';
-import { YES_ } from '@/constants/emotes';
-import { WHAT_ } from '@/constants/emotes';
+import { WHAT_, YES_ } from '@/constants/emotes';
 
 export default new Event(Events.MessageCreate, async (message) => {
   const self = message.client.user.toString();
-
-  log.info(message.content);
 
   if (message.author.bot) return;
   if (!message.content.startsWith(self)) return;
