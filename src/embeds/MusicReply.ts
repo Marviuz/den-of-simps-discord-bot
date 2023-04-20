@@ -73,11 +73,10 @@ export const MusicNowPlaying = ({
 export const MusicQueue = (tracks: Track[]) => {
   return new EmbedBuilder({
     title: 'Queue',
-    description: `${tracks.length} songs`,
     color: BLUE,
     fields: [
       {
-        name: ZERO_WIDTH_SPACE,
+        name: `${tracks.length} songs`,
         value: tracks.map((track, i) => `${i + 1}. ${track.title}`).join('\n'),
       },
     ],
