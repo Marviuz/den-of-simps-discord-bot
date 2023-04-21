@@ -35,27 +35,26 @@ export default new Command({
         embeds: [MusicGeneric('There is no queue', RED)],
       });
 
-    const tracks = queue?.tracks;
-
     if (!interaction.member.voice.channel)
       return await interaction.reply({
         embeds: [MusicGeneric('You are not in my voice channel!', RED)],
       });
 
-    const track = tracks?.toArray()[trackNumber - 1];
+    const track = queue.tracks.toArray()[trackNumber - 2];
 
-    if (track) {
-      queue?.node.skipTo(track);
-
+    if (!track) {
       return await interaction.reply({
-        embeds: [MusicGeneric(`Jumping to ${track.title}`, INFO)],
+        embeds: [MusicGeneric('Invalid track number!', RED)],
         ephemeral: true,
       });
     }
 
-    return await interaction.reply({
-      embeds: [MusicGeneric('Invalid track number!', RED)],
-      ephemeral: true,
+    queue?.node.skipTo(track);
+
+    const message = await interaction.reply({
+      embeds: [MusicGeneric(`Jumping to ${track.title}`, INFO)],
     });
+
+    queue.setMetadata({ interaction, message });
   },
 });

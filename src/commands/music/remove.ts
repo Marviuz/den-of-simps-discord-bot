@@ -35,15 +35,18 @@ export default new Command({
 
     const trackToDelete = queue?.tracks.toArray()[trackNumber - 1];
 
-    if (trackToDelete) {
-      queue.removeTrack(trackToDelete);
+    if (!trackToDelete) {
       return await interaction.reply({
-        embeds: [MusicGeneric(`Removed ${trackToDelete.title}`, WARNING)],
+        embeds: [MusicGeneric('Track not found!', RED)],
       });
     }
 
-    return await interaction.reply({
-      embeds: [MusicGeneric('Track not found!', RED)],
+    queue.removeTrack(trackToDelete);
+
+    const message = await interaction.reply({
+      embeds: [MusicGeneric(`Removed ${trackToDelete.title}`, WARNING)],
     });
+
+    queue.setMetadata({ interaction, message });
   },
 });

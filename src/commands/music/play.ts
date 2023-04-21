@@ -4,10 +4,10 @@ import {
   GuildVoiceChannelResolvable,
 } from 'discord.js';
 
-import { MusicQueueing, MusicGeneric } from '@/embeds/MusicReply';
+import { MusicGeneric } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 import { QueueRepeatMode } from 'discord-player';
-import { RED } from '@/constants/theme';
+import { BLUE, RED } from '@/constants/theme';
 
 enum CommandOptions {
   Search = 'search',
@@ -39,10 +39,13 @@ export default new Command({
 
     await interaction.deferReply();
 
+    const message = await interaction.editReply({
+      embeds: [MusicGeneric('Queueing...', BLUE)],
+    });
+
     const queue = client.player.queues.create(guild, {
       repeatMode: QueueRepeatMode.AUTOPLAY,
       leaveOnEmpty: false,
-      metadata: { interaction },
     });
 
     const searchResults = await client.player.search(q, {
@@ -56,6 +59,12 @@ export default new Command({
 
     const track = searchResults.tracks[0];
 
+    await message.edit({
+      embeds: [MusicGeneric(`Queueing ${track.title}`, BLUE)],
+    });
+
+    queue.setMetadata({ interaction, message });
+
     await queue.player.play(
       voiceChannel as GuildVoiceChannelResolvable,
       track,
@@ -63,7 +72,5 @@ export default new Command({
         requestedBy: interaction.user,
       }
     );
-
-    return await interaction.editReply({ embeds: [MusicQueueing(track)] });
   },
 });

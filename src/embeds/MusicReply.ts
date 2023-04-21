@@ -1,8 +1,7 @@
 import { Track } from 'discord-player';
-import { EmbedBuilder } from 'discord.js';
+import { EmbedBuilder, bold } from 'discord.js';
 
-import { ZERO_WIDTH_SPACE } from '@/constants/characters';
-import { BLUE, GREEN, SUCCESS } from '@/constants/theme';
+import { BLUE, GREEN, INFO } from '@/constants/theme';
 
 export const MusicAdd = ({
   title,
@@ -16,7 +15,7 @@ export const MusicAdd = ({
     title,
     description: author,
     url,
-    color: SUCCESS,
+    color: INFO,
     thumbnail: { url: thumbnail },
     fields: [{ name: 'Added', value: duration }],
     footer: {
@@ -72,14 +71,11 @@ export const MusicNowPlaying = ({
 
 export const MusicQueue = (tracks: Track[]) => {
   return new EmbedBuilder({
-    title: 'Queue',
+    title: `${tracks.length} ${tracks.length > 1 ? 'tracks' : 'track'}`,
+    description: tracks
+      .map((track, i) => `${i + 1}. ${!i ? bold(track.title) : track.title}`)
+      .join('\n'),
     color: BLUE,
-    fields: [
-      {
-        name: `${tracks.length} songs`,
-        value: tracks.map((track, i) => `${i + 1}. ${track.title}`).join('\n'),
-      },
-    ],
   });
 };
 

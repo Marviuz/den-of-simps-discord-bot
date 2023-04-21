@@ -1,6 +1,4 @@
-import { GuildResolvable } from 'discord.js';
-
-import { MusicGeneric, MusicNowPlaying, MusicQueue } from '@/embeds/MusicReply';
+import { MusicGeneric, MusicQueue } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
 import { RED } from '@/constants/theme';
 
@@ -16,9 +14,7 @@ export default new Command({
         embeds: [MusicGeneric('You are not in my voice channel!', RED)],
       });
 
-    const queue = client.player.queues.get(
-      interaction.guildId as GuildResolvable
-    );
+    const queue = client.player.queues.get(interaction.guild!);
 
     if (!queue)
       return await interaction.reply({
@@ -27,10 +23,7 @@ export default new Command({
 
     if (queue.currentTrack) {
       return await interaction.reply({
-        embeds: [
-          MusicNowPlaying(queue.currentTrack),
-          MusicQueue(queue.tracks.toArray()),
-        ],
+        embeds: [MusicQueue([queue.currentTrack, ...queue.tracks.toArray()])],
       });
     }
   },
