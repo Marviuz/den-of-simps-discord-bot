@@ -116,11 +116,11 @@ export class Client extends DiscordClient {
           this.user?.setUsername(Elysia.Name);
           this.user?.setAvatar(Elysia.Image);
         }
-      } catch (err) {
+      } catch (error) {
         // TODO: notify
-        log.error(err);
+        log.error(error);
 
-        throw err;
+        throw error;
       } finally {
         log.info('Schedule finished');
       }

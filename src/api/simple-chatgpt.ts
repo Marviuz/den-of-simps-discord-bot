@@ -1,3 +1,4 @@
+import log from '@/utils/logger';
 import axios from 'axios';
 
 export const AskGPT = async (question: string) => {
@@ -25,6 +26,8 @@ export const AskGPT = async (question: string) => {
       remaining: string;
     };
   } catch (error) {
+    log.error(error);
+
     throw error;
   }
 };

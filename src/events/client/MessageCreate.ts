@@ -4,6 +4,7 @@ import { Event } from '@/lib/Event';
 import { AskGPT } from '@/api/simple-chatgpt';
 import { WHAT_, YES_ } from '@/constants/emotes';
 import { ErrorEmbed } from '@/embeds/Error';
+import log from '@/utils/logger';
 
 export default new Event(Events.MessageCreate, async (message) => {
   const self = message.client.user.toString();
@@ -27,6 +28,8 @@ export default new Event(Events.MessageCreate, async (message) => {
       else await message.reply(YES_);
     }
   } catch (error) {
+    log.error(error);
+
     if (error instanceof Error) {
       await message.reply({ embeds: [ErrorEmbed(error.message)] });
     } else {

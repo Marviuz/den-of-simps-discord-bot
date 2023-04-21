@@ -30,6 +30,8 @@ export default new Event(Events.InteractionCreate, async (interaction) => {
       args: interaction.options as CommandInteractionOptionResolver,
     });
   } catch (error) {
+    log.error(error);
+
     if (error instanceof Error) {
       if (interaction.deferred || interaction.replied)
         await interaction.editReply({ embeds: [ErrorEmbed(error.message)] });

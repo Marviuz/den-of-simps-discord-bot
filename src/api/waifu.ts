@@ -1,6 +1,7 @@
 // https://waifu.pics/
 
 import { WaifuCategoryNSFW, WaifuCategorySFW } from '@/types/WaifuPics';
+import log from '@/utils/logger';
 import axios from 'axios';
 
 export const waifuPics = async <T>(
@@ -14,6 +15,8 @@ export const waifuPics = async <T>(
 
     return data as { url: string };
   } catch (error) {
+    log.error(error);
+
     throw error;
   }
 };
