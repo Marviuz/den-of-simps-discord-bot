@@ -44,7 +44,7 @@ export default new Command({
     });
 
     const queue = client.player.queues.create(guild, {
-      repeatMode: QueueRepeatMode.AUTOPLAY,
+      // repeatMode: QueueRepeatMode.AUTOPLAY,
       leaveOnEmpty: false,
       metadata: { interaction },
     });
