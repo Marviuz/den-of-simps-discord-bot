@@ -23,10 +23,8 @@ export default new Command({
 
     queue?.node.skip();
 
-    const message = await interaction.reply({
+    await interaction.reply({
       embeds: [MusicGeneric('skipping...', INFO)],
     });
-
-    queue.setMetadata({ interaction, message });
   },
 });

@@ -51,10 +51,8 @@ export default new Command({
 
     queue?.node.skipTo(track);
 
-    const message = await interaction.reply({
+    await interaction.reply({
       embeds: [MusicGeneric(`Jumping to ${track.title}`, INFO)],
     });
-
-    queue.setMetadata({ interaction, message });
   },
 });

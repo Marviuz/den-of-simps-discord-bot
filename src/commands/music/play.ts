@@ -39,13 +39,14 @@ export default new Command({
 
     await interaction.deferReply();
 
-    const message = await interaction.editReply({
+    await interaction.editReply({
       embeds: [MusicGeneric('Queueing...', BLUE)],
     });
 
     const queue = client.player.queues.create(guild, {
       repeatMode: QueueRepeatMode.AUTOPLAY,
       leaveOnEmpty: false,
+      metadata: { interaction },
     });
 
     const searchResults = await client.player.search(q, {
@@ -59,11 +60,9 @@ export default new Command({
 
     const track = searchResults.tracks[0];
 
-    await message.edit({
+    await interaction.editReply({
       embeds: [MusicGeneric(`Queueing ${track.title}`, BLUE)],
     });
-
-    queue.setMetadata({ interaction, message });
 
     await queue.player.play(
       voiceChannel as GuildVoiceChannelResolvable,

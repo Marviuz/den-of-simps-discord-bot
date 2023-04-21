@@ -43,10 +43,8 @@ export default new Command({
 
     queue.removeTrack(trackToDelete);
 
-    const message = await interaction.reply({
+    await interaction.reply({
       embeds: [MusicGeneric(`Removed ${trackToDelete.title}`, WARNING)],
     });
-
-    queue.setMetadata({ interaction, message });
   },
 });
