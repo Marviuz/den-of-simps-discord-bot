@@ -24,7 +24,7 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "node-schedule": "^2.1.1",
-    "ytdl-core": "^4.11.4"
+    "play-dl": "^1.9.6"
   },
   "devDependencies": {
     "@types/node": "^18.15.12",
