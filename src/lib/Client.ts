@@ -1,4 +1,5 @@
 import { Player } from 'discord-player';
+import schedule from 'node-schedule';
 import {
   ApplicationCommandDataResolvable,
   Client as DiscordClient,
@@ -13,6 +14,8 @@ import * as clientEvents from '@/events/client';
 import * as playerEvents from '@/events/player';
 import { ICommand } from '@/types/Command';
 import log from '@/utils/logger';
+import { today } from '@/utils/time';
+import { Elysia, Ganyu } from '@/constants/fictionals';
 
 export class Client extends DiscordClient {
   commands: Collection<string, ICommand> = new Collection();
@@ -39,6 +42,7 @@ export class Client extends DiscordClient {
     this.registerSlashCommands();
     this.registerBotEvents();
     this.registerPlayerEvents();
+    this.createFictional();
 
     this.login(process.env.DISCORD_BOT_TOKEN);
   }
@@ -88,4 +92,40 @@ export class Client extends DiscordClient {
       this.player.events.on(event, run as never);
     });
   }
+
+  /**
+   * Setup character switch
+   */
+  createFictional = () => {
+    log.info('Creating schedule for fictional character...');
+
+    const rule = new schedule.RecurrenceRule();
+
+    rule.hour = 0;
+    rule.minute = 0;
+    rule.tz = process.env.APP_TZ!;
+
+    schedule.scheduleJob(rule, () => {
+      try {
+        if (parseInt(today().format('D')) % 2) {
+          log.info('Deploying Ganyu');
+          this.user?.setUsername(Ganyu.Name);
+          this.user?.setAvatar(Ganyu.Image);
+        } else {
+          log.info('Deploying Elysia');
+          this.user?.setUsername(Elysia.Name);
+          this.user?.setAvatar(Elysia.Image);
+        }
+      } catch (err) {
+        // TODO: notify
+        log.error(err);
+
+        throw err;
+      } finally {
+        log.info('Schedule finished');
+      }
+    });
+
+    log.info('Schedule end');
+  };
 }

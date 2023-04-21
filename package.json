@@ -23,10 +23,12 @@
     "mathjs": "^11.8.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
+    "node-schedule": "^2.1.1",
     "play-dl": "^1.9.6"
   },
   "devDependencies": {
     "@types/node": "^18.15.12",
+    "@types/node-schedule": "^2.1.0",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "eslint": "^8.38.0",

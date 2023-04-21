@@ -5,3 +5,5 @@ export const now = () =>
   moment()
     .tz(process.env.APP_TZ as string)
     .format('MMM. DD YYYY | hh:mm A');
+
+export const today = () => moment();
