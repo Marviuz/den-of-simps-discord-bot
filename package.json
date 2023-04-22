@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "node ./build",
-    "build": "rimraf ./build && tsc && tsc-alias",
+    "start": "ts-node --transpileOnly -r tsconfig-paths/register -r dotenv/config .",
     "dev": "nodemon -r dotenv/config -r tsconfig-paths/register ./index.ts"
   },
   "keywords": [],
@@ -39,7 +38,6 @@
     "nodemon": "^2.0.22",
     "rimraf": "^4.4.1",
     "ts-node": "^10.9.1",
-    "tsc-alias": "^1.8.5",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"
   }
