@@ -39,28 +39,29 @@ export default new Command({
 
     await interaction.deferReply();
 
-    await interaction.editReply({
+    const message = await interaction.editReply({
       embeds: [MusicGeneric('Queueing...', BLUE)],
     });
 
     const queue = client.player.queues.create(guild, {
-      // repeatMode: QueueRepeatMode.AUTOPLAY,
+      repeatMode: QueueRepeatMode.AUTOPLAY,
       leaveOnEmpty: false,
-      metadata: { interaction },
     });
+
+    queue.setMetadata({ interaction, message });
 
     const searchResults = await client.player.search(q, {
       searchEngine: 'youtube', // TODO: add options to input
     });
 
     if (!searchResults.hasTracks())
-      return await interaction.editReply({
+      return await message.edit({
         embeds: [MusicGeneric(`No tracks found for ${q}`, RED)],
       });
 
     const track = searchResults.tracks[0];
 
-    await interaction.editReply({
+    await message.edit({
       embeds: [MusicGeneric(`Queueing ${track.title}`, BLUE)],
     });
 

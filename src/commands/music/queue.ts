@@ -26,5 +26,7 @@ export default new Command({
         embeds: [MusicQueue([queue.currentTrack, ...queue.tracks.toArray()])],
       });
     }
+
+    queue.setMetadata({ interaction, message: null });
   },
 });

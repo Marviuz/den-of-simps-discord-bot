@@ -46,5 +46,7 @@ export default new Command({
     await interaction.reply({
       embeds: [MusicGeneric(`Removed ${trackToDelete.title}`, WARNING)],
     });
+
+    queue.setMetadata({ interaction, message: null });
   },
 });

@@ -54,5 +54,7 @@ export default new Command({
         ),
       ],
     });
+
+    queue?.setMetadata({ interaction, message: null });
   },
 });

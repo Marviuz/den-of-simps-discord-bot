@@ -24,5 +24,6 @@ export default new Command({
     await interaction.reply({
       embeds: [MusicGeneric('Shuffled', GREEN)],
     });
+    queue.setMetadata({ interaction, message: null });
   },
 });

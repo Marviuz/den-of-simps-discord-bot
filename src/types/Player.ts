@@ -3,4 +3,5 @@ import { Interaction } from './Command';
 
 export type QueueMeta = {
   interaction: Interaction;
+  message: Message | null;
 };
