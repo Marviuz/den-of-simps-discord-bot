@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "ts-node --transpileOnly -r tsconfig-paths/register -r dotenv/config .",
+    "start": "ts-node --transpileOnly -r tsconfig-paths/register .",
     "dev": "nodemon -r dotenv/config -r tsconfig-paths/register ./index.ts"
   },
   "keywords": [],
@@ -36,7 +36,6 @@
     "eslint-import-resolver-typescript": "^3.5.5",
     "eslint-plugin-import": "^2.27.5",
     "nodemon": "^2.0.22",
-    "rimraf": "^4.4.1",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.0.4"
