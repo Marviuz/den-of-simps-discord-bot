@@ -10,6 +10,7 @@ declare global {
       APP_TZ: string;
       RAPID_API_KEY: string;
       RAPID_API_HOST: string;
+      PORT: number;
     }
   }
 }
