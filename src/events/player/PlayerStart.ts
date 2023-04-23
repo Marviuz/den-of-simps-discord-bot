@@ -9,16 +9,12 @@ export default new PlayerEvent('playerStart', async (queue, track) => {
     if (meta.message)
       return await meta.message.edit({ embeds: [MusicNowPlaying(track)] });
   } catch (error) {
-    log.error(error);
+    log.warn('Message metadata is probably expired.');
 
-    return await meta.interaction.channel?.send({
+    const message = await meta.interaction.channel?.send({
       embeds: [MusicNowPlaying(track)],
     });
+
+    queue.setMetadata({ interaction: meta.interaction, message: message! });
   }
-
-  const message = await meta.interaction.channel?.send({
-    embeds: [MusicNowPlaying(track)],
-  });
-
-  queue.setMetadata({ interaction: meta.interaction, message: message! });
 });
