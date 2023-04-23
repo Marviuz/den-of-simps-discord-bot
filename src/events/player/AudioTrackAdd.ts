@@ -1,16 +1,25 @@
 import { MusicAdd } from '@/embeds/MusicReply';
 import { PlayerEvent } from '@/lib/Event';
+import log from '@/utils/logger';
 
 export default new PlayerEvent('audioTrackAdd', async (queue, track) => {
   const meta = queue.metadata;
 
-  if (meta.message)
-    await meta.message.edit({
+  try {
+    if (meta.message)
+      await meta.message.edit({
+        embeds: [MusicAdd(track)],
+      });
+  } catch (error) {
+    log.error(error);
+
+    await meta.interaction.channel?.send({
       embeds: [MusicAdd(track)],
     });
-
-  queue.setMetadata({
-    interaction: queue.metadata.interaction,
-    message: null,
-  });
+  } finally {
+    queue.setMetadata({
+      interaction: queue.metadata.interaction,
+      message: null,
+    });
+  }
 });
