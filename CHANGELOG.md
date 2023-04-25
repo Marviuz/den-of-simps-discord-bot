@@ -1,5 +1,11 @@
 # @marviuz/discord-bot
 
+## 2.1.3
+
+### Patch Changes
+
+- a7f8efd: ignore changeset on prod
+
 ## 2.1.2
 
 ### Patch Changes
