@@ -1,5 +1,11 @@
 # @marviuz/discord-bot
 
+## 2.1.2
+
+### Patch Changes
+
+- 7e6766d: readded publish
+
 ## 2.1.1
 
 ### Patch Changes
