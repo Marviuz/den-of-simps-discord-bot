@@ -1,5 +1,11 @@
 # @marviuz/discord-bot
 
+## 2.1.4
+
+### Patch Changes
+
+- 3aea354: fix workflow branches
+
 ## 2.1.3
 
 ### Patch Changes
