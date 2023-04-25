@@ -23,3 +23,5 @@ jobs:
       - name: Create pull request
         id: changesets
         uses: changesets/action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
