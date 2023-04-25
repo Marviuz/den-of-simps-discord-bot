@@ -3,8 +3,7 @@ on:
   push:
     branches:
       - '**'
-    branches-ignore:
-      - production
+      - '!production'
 
 jobs:
   build:
