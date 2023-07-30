@@ -1,5 +1,11 @@
 # @marviuz/discord-bot
 
+## 2.2.0
+
+### Minor Changes
+
+- ccd96cc: update packages
+
 ## 2.1.4
 
 ### Patch Changes
