@@ -16,6 +16,7 @@ import { ICommand } from '@/types/Command';
 import log from '@/utils/logger';
 import { today } from '@/utils/time';
 import { Elysia, Ganyu } from '@/constants/fictionals';
+import { YouTubeExtractor } from '@discord-player/extractor';
 
 export class Client extends DiscordClient {
   commands: Collection<string, ICommand> = new Collection();
@@ -88,6 +89,8 @@ export class Client extends DiscordClient {
    * Setup player events
    */
   async registerPlayerEvents() {
+    this.player.extractors.register(YouTubeExtractor, {});
+
     Object.values(playerEvents).forEach(({ event, run }) => {
       this.player.events.on(event, run as never);
     });
