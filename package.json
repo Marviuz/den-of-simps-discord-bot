@@ -1,15 +1,14 @@
 {
   "name": "@marviuz/discord-bot",
   "version": "2.2.0",
-  "description": "",
+  "description": "Den of simps discord bot",
   "main": "index.ts",
   "scripts": {
     "start": "node -r dotenv/config ./dist",
     "build": "rimraf ./dist && tsup ./index.ts",
     "dev": "nodemon -r dotenv/config -r tsconfig-paths/register ./index.ts",
-    "lint": "tsc"
+    "lint": "tsc --noEmit"
   },
-  "keywords": [],
   "author": "Marviuz (https://www.twitch.tv/marviuz)",
   "license": "MIT",
   "dependencies": {
