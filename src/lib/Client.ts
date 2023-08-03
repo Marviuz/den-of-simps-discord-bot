@@ -62,7 +62,7 @@ export class Client extends DiscordClient {
       process.env.DISCORD_BOT_TOKEN as string
     );
     try {
-      log.info(`Refresing ${slashCommands.length} slash (/) commands.`);
+      log.info(`Refreshing ${slashCommands.length} slash (/) commands.`);
 
       const data = (await rest.put(
         Routes.applicationCommands(process.env.DISCORD_CLIENT_ID as string),
