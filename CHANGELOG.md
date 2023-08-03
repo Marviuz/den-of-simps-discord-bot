@@ -1,5 +1,11 @@
 # @marviuz/discord-bot
 
+## 2.2.1
+
+### Patch Changes
+
+- 31bc533: Fixes extractor issue
+
 ## 2.2.0
 
 ### Minor Changes
