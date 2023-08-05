@@ -1,13 +1,13 @@
-export { default as ping } from './ping';
-export { default as calc } from './calc';
-export { default as bonk } from './bonk';
-export { default as find } from './find';
-export { default as coinflip } from './coinflip';
+export * from './ping';
+export * from './calc';
+export * from './bonk';
+export * from './find';
+export * from './coinflip';
 
-export { default as play } from './music/play';
-export { default as queue } from './music/queue';
-export { default as skip } from './music/skip';
-export { default as remove } from './music/remove';
-export { default as jump } from './music/jump';
-export { default as shuffle } from './music/shuffle';
-export { default as mode } from './music/mode';
+export * from './music/play';
+export * from './music/queue';
+export * from './music/skip';
+export * from './music/remove';
+export * from './music/jump';
+export * from './music/shuffle';
+export * from './music/mode';
