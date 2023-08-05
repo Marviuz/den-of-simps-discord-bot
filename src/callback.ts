@@ -8,5 +8,5 @@ server.get('/callback', (req, res) => {
 });
 
 server.listen(process.env.PORT, () =>
-  log.info(`Listening ${process.env.PORT}`)
+  log.info(`Listening ${process.env.PORT}`),
 );

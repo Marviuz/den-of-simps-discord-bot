@@ -5,7 +5,7 @@ export interface TraceMoeResponse {
 }
 
 export interface Result {
-  anilist: number;
+  anilist: number; // cspell:disable-line
   filename: string;
   episode: null;
   from: number;

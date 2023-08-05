@@ -1,6 +1,6 @@
+import { RED } from '@/constants/theme';
 import { MusicGeneric, MusicQueue } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
-import { RED } from '@/constants/theme';
 
 export default new Command({
   name: 'queue',
@@ -14,7 +14,8 @@ export default new Command({
         embeds: [MusicGeneric('You are not in my voice channel!', RED)],
       });
 
-    const queue = client.player.queues.get(interaction.guild!);
+    if (!interaction.guild) throw new Error('Guild ID not available!');
+    const queue = client.player.queues.get(interaction.guild);
 
     if (!queue)
       return await interaction.reply({

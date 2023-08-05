@@ -1,6 +1,6 @@
-import { Command } from '@/lib/Command';
 import { ApplicationCommandOptionType } from 'discord.js';
 import * as mathjs from 'mathjs';
+import { Command } from '@/lib/Command';
 
 enum CommandOptions {
   Equation = 'equation',
@@ -20,7 +20,8 @@ export default new Command({
   run: async ({ interaction, args }) => {
     if (!interaction.isChatInputCommand()) return;
 
-    const equation = args.getString(CommandOptions.Equation)!;
+    const equation = args.getString(CommandOptions.Equation);
+    if (!equation) throw new Error('Equation not available!');
 
     await interaction.reply(`The answer is ${mathjs.evaluate(equation)}`);
   },

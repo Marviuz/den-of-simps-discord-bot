@@ -15,6 +15,6 @@ export default new PlayerEvent('playerStart', async (queue, track) => {
       embeds: [MusicNowPlaying(track)],
     });
 
-    queue.setMetadata({ interaction: meta.interaction, message: message! });
+    if (message) queue.setMetadata({ interaction: meta.interaction, message });
   }
 });

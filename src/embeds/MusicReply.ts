@@ -1,6 +1,5 @@
 import { Track } from 'discord-player';
 import { EmbedBuilder, bold } from 'discord.js';
-
 import { BLUE, GREEN, INFO } from '@/constants/theme';
 
 export const MusicAdd = ({

@@ -1,7 +1,7 @@
+import { ApplicationCommandOptionType } from 'discord.js';
 import { trace } from '@/api/trace-moe';
 import { FindResult } from '@/embeds/Find';
 import { Command } from '@/lib/Command';
-import { ApplicationCommandOptionType } from 'discord.js';
 
 enum CommandOptions {
   Image = 'image',
@@ -21,7 +21,8 @@ export default new Command({
   run: async ({ args, interaction }) => {
     if (!interaction.isChatInputCommand()) return;
 
-    const { url } = args.getAttachment(CommandOptions.Image)!;
+    const { url } = args.getAttachment(CommandOptions.Image) || {};
+    if (!url) throw new Error('URL not available!');
 
     await interaction.deferReply();
 

@@ -1,13 +1,12 @@
+import { QueueRepeatMode } from 'discord-player';
 import {
   ApplicationCommandOptionType,
   GuildResolvable,
   GuildVoiceChannelResolvable,
 } from 'discord.js';
-
+import { BLUE, RED } from '@/constants/theme';
 import { MusicGeneric } from '@/embeds/MusicReply';
 import { Command } from '@/lib/Command';
-import { QueueRepeatMode } from 'discord-player';
-import { BLUE, RED } from '@/constants/theme';
 
 enum CommandOptions {
   Search = 'search',
@@ -27,7 +26,8 @@ export default new Command({
   run: async ({ interaction, client, args }) => {
     if (!interaction.isChatInputCommand()) return;
 
-    const q = args.getString(CommandOptions.Search)!;
+    const q = args.getString(CommandOptions.Search);
+    if (!q) throw new Error('Search not available!');
     const voiceChannel = interaction.member.voice.channel;
     const guild = interaction.guildId as GuildResolvable;
 
@@ -70,7 +70,7 @@ export default new Command({
       track,
       {
         requestedBy: interaction.user,
-      }
+      },
     );
   },
 });

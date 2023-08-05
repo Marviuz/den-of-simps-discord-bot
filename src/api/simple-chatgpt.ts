@@ -1,5 +1,5 @@
-import log from '@/utils/logger';
 import axios from 'axios';
+import log from '@/utils/logger';
 
 export const AskGPT = async (question: string) => {
   try {
@@ -14,10 +14,12 @@ export const AskGPT = async (question: string) => {
           'X-RapidAPI-Key': process.env.RAPID_API_KEY,
           'X-RapidAPI-Host': process.env.RAPID_API_HOST,
         },
-      }
+      },
     );
 
+    // cspell:disable-next-line
     const limit = parseInt(headers['x-ratelimit-requests-limit']);
+    // cspell:disable-next-line
     const remaining = parseInt(headers['x-ratelimit-requests-remaining']);
 
     return { limit, remaining, ...data } as {

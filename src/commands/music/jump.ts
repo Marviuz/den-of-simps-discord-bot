@@ -1,8 +1,7 @@
 import { ApplicationCommandOptionType } from 'discord.js';
-
-import { Command } from '@/lib/Command';
-import { MusicGeneric } from '@/embeds/MusicReply';
 import { INFO, RED } from '@/constants/theme';
+import { MusicGeneric } from '@/embeds/MusicReply';
+import { Command } from '@/lib/Command';
 
 enum CommandOptions {
   TrackNumber = 'track_number',
@@ -26,9 +25,11 @@ export default new Command({
         embeds: [MusicGeneric('You are not in my voice channel!', RED)],
       });
 
-    const trackNumber = args.getNumber(CommandOptions.TrackNumber)!;
+    const trackNumber = args.getNumber(CommandOptions.TrackNumber);
+    if (!trackNumber) throw new Error('Track number not found!');
 
-    const queue = client.player.queues.get(interaction.guildId!);
+    if (!interaction.guildId) throw new Error('Guild ID not found!');
+    const queue = client.player.queues.get(interaction.guildId);
 
     if (!queue)
       return await interaction.reply({

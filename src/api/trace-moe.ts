@@ -1,8 +1,8 @@
 // https://soruly.github.io/trace.moe-api/#/
 
+import axios from 'axios';
 import { TraceMoeResponse } from '@/types/TraceMoe';
 import log from '@/utils/logger';
-import axios from 'axios';
 
 export const trace = async (url: string) => {
   try {

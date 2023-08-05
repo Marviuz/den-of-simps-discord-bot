@@ -1,13 +1,13 @@
-name: Publish
+name: Format and lint
 on:
   push:
     branches:
-      - 'main'
-
-concurrency: ${{ github.workflow }}-${{  github.ref }}
+      - '**'
+      - '!production'
+      - '!main'
 
 jobs:
-  build:
+  format-and-lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -42,12 +42,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Create release
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          commit: 'chore(release): version packages'
-          title: 'chore(release): version packages'
-          publish: npx changeset publish
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Spell check
+        run: pnpm cspell **/*.{ts}
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Build
+        run: pnpm build
