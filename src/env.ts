@@ -11,10 +11,6 @@ const createEnv = () => {
 
     DISCORD_BOT_CREATOR: z.string(),
 
-    GENIUS_CLIENT_ID: z.string(),
-    GENIUS_CLIENT_SECRET: z.string(),
-    GENIUS_ACCESS_TOKEN: z.string(),
-
     NODE_ENV: z.string(),
     APP_TZ: z.string(),
 
