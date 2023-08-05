@@ -44,7 +44,7 @@ jobs:
         run: pnpm install
 
       - name: Spell check
-        run: pnpm cspell **/*.{ts}
+        run: pnpm cspell "**/*.(ts)"
 
       - name: Lint
         run: pnpm lint
