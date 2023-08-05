@@ -1,5 +1,11 @@
 # @marviuz/discord-bot
 
+## 2.3.0
+
+### Minor Changes
+
+- 8735b2f: added env.ts for type validation
+
 ## 2.2.1
 
 ### Patch Changes
