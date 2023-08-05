@@ -66,7 +66,7 @@ export class Client extends DiscordClient {
       log.info(`Refreshing ${slashCommands.length} slash (/) commands.`);
 
       const data = (await rest.put(
-        Routes.applicationCommands(process.env.DISCORD_CLIENT_ID as string),
+        Routes.applicationCommands(process.env.DISCORD_CLIENT_ID),
         { body: slashCommands }
       )) as unknown[];
 
