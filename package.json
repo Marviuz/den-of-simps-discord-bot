@@ -3,6 +3,7 @@
   "version": "2.3.0",
   "description": "Den of simps discord bot",
   "main": "index.ts",
+  "private": true,
   "scripts": {
     "start": "node -r dotenv/config ./dist",
     "build": "rimraf ./dist && tsup ./index.ts",
