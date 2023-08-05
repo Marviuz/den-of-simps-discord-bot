@@ -2,6 +2,7 @@ import { Events } from 'discord.js';
 import { AskGPT } from '@/api/simple-chatgpt';
 import { WHAT_, YES_ } from '@/constants/emotes';
 import { ErrorEmbed } from '@/embeds/Error';
+import { env } from '@/env';
 import { Event } from '@/lib/Event';
 import log from '@/utils/logger';
 
@@ -22,7 +23,7 @@ export default new Event(Events.MessageCreate, async (message) => {
         `${answer}\n\n\`You have ${remaining}/${limit} conversations this month.\``,
       );
     } else {
-      if (message.author.id !== process.env.DISCORD_BOT_CREATOR)
+      if (message.author.id !== env.DISCORD_BOT_CREATOR)
         await message.reply(WHAT_);
       else await message.reply(YES_);
     }

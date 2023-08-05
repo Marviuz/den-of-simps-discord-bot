@@ -11,6 +11,7 @@ import {
 import { RecurrenceRule, scheduleJob } from 'node-schedule';
 import * as clientCommands from '@/commands';
 import { Elysia, Ganyu } from '@/constants/fictionals'; // cspell:disable-line
+import { env } from '@/env';
 import * as clientEvents from '@/events/client';
 import * as playerEvents from '@/events/player';
 import { ICommand } from '@/types/Command';
@@ -44,7 +45,7 @@ export class Client extends DiscordClient {
     this.registerPlayerEvents();
     this.createFictional();
 
-    this.login(process.env.DISCORD_BOT_TOKEN);
+    this.login(env.DISCORD_BOT_TOKEN);
   }
 
   /**
@@ -58,14 +59,12 @@ export class Client extends DiscordClient {
       slashCommands.push($command);
     });
 
-    const rest = new REST({ version: '10' }).setToken(
-      process.env.DISCORD_BOT_TOKEN,
-    );
+    const rest = new REST({ version: '10' }).setToken(env.DISCORD_BOT_TOKEN);
     try {
       log.info(`Refreshing ${slashCommands.length} slash (/) commands.`);
 
       const data = (await rest.put(
-        Routes.applicationCommands(process.env.DISCORD_CLIENT_ID),
+        Routes.applicationCommands(env.DISCORD_CLIENT_ID),
         { body: slashCommands },
       )) as unknown[];
 
@@ -105,7 +104,7 @@ export class Client extends DiscordClient {
 
     rule.hour = 0;
     rule.minute = 0;
-    rule.tz = process.env.APP_TZ;
+    rule.tz = env.APP_TZ;
 
     scheduleJob(rule, () => {
       try {

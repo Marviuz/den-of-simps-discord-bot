@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { env } from '@/env';
 import log from '@/utils/logger';
 
 export const AskGPT = async (question: string) => {
@@ -11,8 +12,8 @@ export const AskGPT = async (question: string) => {
       {
         headers: {
           'content-type': 'application/json',
-          'X-RapidAPI-Key': process.env.RAPID_API_KEY,
-          'X-RapidAPI-Host': process.env.RAPID_API_HOST,
+          'X-RapidAPI-Key': env.RAPID_API_KEY,
+          'X-RapidAPI-Host': env.RAPID_API_HOST,
         },
       },
     );
