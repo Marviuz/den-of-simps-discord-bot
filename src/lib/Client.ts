@@ -1,5 +1,5 @@
+import { YouTubeExtractor } from '@discord-player/extractor';
 import { Player } from 'discord-player';
-import schedule from 'node-schedule';
 import {
   ApplicationCommandDataResolvable,
   Client as DiscordClient,
@@ -8,15 +8,15 @@ import {
   REST,
   Routes,
 } from 'discord.js';
-
+import { RecurrenceRule, scheduleJob } from 'node-schedule';
 import * as clientCommands from '@/commands';
+import { Elysia, Ganyu } from '@/constants/fictionals'; // cspell:disable-line
+import { env } from '@/env';
 import * as clientEvents from '@/events/client';
 import * as playerEvents from '@/events/player';
 import { ICommand } from '@/types/Command';
 import log from '@/utils/logger';
 import { today } from '@/utils/time';
-import { Elysia, Ganyu } from '@/constants/fictionals';
-import { YouTubeExtractor } from '@discord-player/extractor';
 
 export class Client extends DiscordClient {
   commands: Collection<string, ICommand> = new Collection();
@@ -34,7 +34,7 @@ export class Client extends DiscordClient {
       ],
       presence: {
         status: 'online',
-        activities: [{ name: "with Marviuz's ʞɔoɔ" }],
+        activities: [{ name: "with Marviuz's ʞɔoɔ" }], // cspell:disable-line
       },
     });
   }
@@ -45,7 +45,7 @@ export class Client extends DiscordClient {
     this.registerPlayerEvents();
     this.createFictional();
 
-    this.login(process.env.DISCORD_BOT_TOKEN);
+    this.login(env.DISCORD_BOT_TOKEN);
   }
 
   /**
@@ -54,20 +54,18 @@ export class Client extends DiscordClient {
   private async registerSlashCommands() {
     const slashCommands: ApplicationCommandDataResolvable[] = [];
     Object.values(clientCommands).forEach((command) => {
-      const $command = command as ICommand;
+      const $command = <ICommand>command;
       this.commands.set($command.name, $command);
       slashCommands.push($command);
     });
 
-    const rest = new REST({ version: '10' }).setToken(
-      process.env.DISCORD_BOT_TOKEN as string
-    );
+    const rest = new REST({ version: '10' }).setToken(env.DISCORD_BOT_TOKEN);
     try {
       log.info(`Refreshing ${slashCommands.length} slash (/) commands.`);
 
       const data = (await rest.put(
-        Routes.applicationCommands(process.env.DISCORD_CLIENT_ID),
-        { body: slashCommands }
+        Routes.applicationCommands(env.DISCORD_CLIENT_ID),
+        { body: slashCommands },
       )) as unknown[];
 
       log.success(`Reloaded ${data.length} slash (/) commands.`);
@@ -102,13 +100,13 @@ export class Client extends DiscordClient {
   createFictional = () => {
     log.info('Creating schedule for fictional character...');
 
-    const rule = new schedule.RecurrenceRule();
+    const rule = new RecurrenceRule();
 
     rule.hour = 0;
     rule.minute = 0;
-    rule.tz = process.env.APP_TZ!;
+    rule.tz = env.APP_TZ;
 
-    schedule.scheduleJob(rule, () => {
+    scheduleJob(rule, () => {
       try {
         if (parseInt(today().format('D')) % 2) {
           log.info('Deploying Ganyu');

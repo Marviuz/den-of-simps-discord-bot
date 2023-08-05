@@ -2,7 +2,7 @@ import { COIN_HEADS, COIN_TAILS } from '@/constants/emotes';
 import { Command } from '@/lib/Command';
 
 export default new Command({
-  name: 'coinflip',
+  name: 'coinflip', // cspell:disable-line
   description: 'Heads or tails?',
   run: async ({ interaction }) => {
     if (!interaction.isChatInputCommand()) return;

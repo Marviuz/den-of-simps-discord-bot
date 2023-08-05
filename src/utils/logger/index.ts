@@ -1,5 +1,5 @@
+/* eslint-disable no-console */
 import { now } from '../time';
-
 import * as theme from './theme';
 
 const log = (...message: unknown[]) =>

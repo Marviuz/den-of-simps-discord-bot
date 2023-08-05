@@ -1,3 +1,4 @@
+// cSpell:disable
 export type WaifuCategorySFW =
   | 'waifu'
   | 'neko'
@@ -32,3 +33,4 @@ export type WaifuCategorySFW =
   | 'cringe';
 
 export type WaifuCategoryNSFW = 'waifu' | 'neko' | 'trap' | 'blowjob';
+// cSpell:enable

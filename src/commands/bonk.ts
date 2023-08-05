@@ -1,7 +1,7 @@
+import { ApplicationCommandOptionType } from 'discord.js';
 import { waifuPics } from '@/api/waifu';
 import { Bonk } from '@/embeds/Bonk';
 import { Command } from '@/lib/Command';
-import { ApplicationCommandOptionType } from 'discord.js';
 
 enum CommandOptions {
   User = 'someone',
@@ -21,7 +21,8 @@ export default new Command({
   run: async ({ interaction, args }) => {
     if (!interaction.isChatInputCommand()) return;
 
-    const user = args.getUser(CommandOptions.User)!;
+    const user = args.getUser(CommandOptions.User);
+    if (!user) throw new Error('User not found!');
 
     await interaction.deferReply();
 

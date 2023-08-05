@@ -1,7 +1,8 @@
+import { EmbedBuilder } from 'discord.js';
 import { BLUE } from '@/constants/theme';
 import { Result } from '@/types/TraceMoe';
-import { EmbedBuilder } from 'discord.js';
 
+// cspell:disable-next-line
 export const FindResult = ({ filename, image, anilist, similarity }: Result) =>
   new EmbedBuilder({
     title: filename,

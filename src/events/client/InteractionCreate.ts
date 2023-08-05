@@ -1,11 +1,10 @@
 import { CommandInteractionOptionResolver, Events } from 'discord.js';
-
 import { client } from '@/bot';
+import { ErrorEmbed } from '@/embeds/Error';
 import { Event } from '@/lib/Event';
 import { Interaction } from '@/types/Command';
 import log from '@/utils/logger';
 import { info } from '@/utils/logger/theme';
-import { ErrorEmbed } from '@/embeds/Error';
 
 export default new Event(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;

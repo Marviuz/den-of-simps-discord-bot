@@ -1,9 +1,9 @@
 import { Events } from 'discord.js';
-
-import { Event } from '@/lib/Event';
 import { AskGPT } from '@/api/simple-chatgpt';
 import { WHAT_, YES_ } from '@/constants/emotes';
 import { ErrorEmbed } from '@/embeds/Error';
+import { env } from '@/env';
+import { Event } from '@/lib/Event';
 import log from '@/utils/logger';
 
 export default new Event(Events.MessageCreate, async (message) => {
@@ -12,7 +12,7 @@ export default new Event(Events.MessageCreate, async (message) => {
   if (message.author.bot) return;
   if (!message.content.startsWith(self)) return;
 
-  const [_, ..._content] = message.content.split(self);
+  const [, ..._content] = message.content.split(self);
   const content = _content.join(self).trim();
 
   try {
@@ -20,10 +20,10 @@ export default new Event(Events.MessageCreate, async (message) => {
     if (content) {
       const { answer, limit, remaining } = await AskGPT(content);
       await message.reply(
-        `${answer}\n\n\`You have ${remaining}/${limit} conversations this month.\``
+        `${answer}\n\n\`You have ${remaining}/${limit} conversations this month.\``,
       );
     } else {
-      if (message.author.id !== process.env.DISCORD_BOT_CREATOR)
+      if (message.author.id !== env.DISCORD_BOT_CREATOR)
         await message.reply(WHAT_);
       else await message.reply(YES_);
     }

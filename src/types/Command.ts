@@ -5,7 +5,6 @@ import {
   GuildMember,
   PermissionResolvable,
 } from 'discord.js';
-
 import { Client } from '@/lib/Client';
 
 export interface Interaction extends CommandInteraction {
@@ -22,6 +21,6 @@ type RunCommandType = (options: IRunCommandParams) => unknown;
 
 export interface ICommand extends ChatInputApplicationCommandData {
   userPermissions?: PermissionResolvable[];
-  cooldown?: number;
+  cooldown?: number; // cspell:disable-line
   run: RunCommandType;
 }

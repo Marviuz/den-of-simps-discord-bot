@@ -12,7 +12,8 @@ export default new Command({
         embeds: [MusicGeneric('You are not in my voice channel!', RED)],
       });
 
-    const queue = client.player.queues.get(interaction.guild!);
+    if (!interaction.guild) throw new Error('Guild Id not found!');
+    const queue = client.player.queues.get(interaction.guild);
 
     if (!queue)
       return await interaction.reply({

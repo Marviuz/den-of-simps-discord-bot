@@ -1,5 +1,4 @@
 import { Events } from 'discord.js';
-
 import { IS_DEV } from '@/constants';
 import { Event } from '@/lib/Event';
 import log from '@/utils/logger';

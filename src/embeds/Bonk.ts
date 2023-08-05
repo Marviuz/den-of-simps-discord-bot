@@ -1,5 +1,5 @@
+import { EmbedBuilder } from 'discord.js';
 import { BLUE } from '@/constants/theme';
-import { EmbedBuilder, User } from 'discord.js';
 
 export const Bonk = (image: string) =>
   new EmbedBuilder({

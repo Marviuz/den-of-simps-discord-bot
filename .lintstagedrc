@@ -1,0 +1,4 @@
+{
+  "*.(ts|js)": ["prettier --write", "eslint --fix --config .eslintrc.cjs --max-warnings=0 --no-ignore"],
+  "*.(json)": "prettier --write"
+}

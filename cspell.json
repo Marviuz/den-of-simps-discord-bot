@@ -1,0 +1,6 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "words": ["tsup", "Ganyu", "Elysia", "Waifu"],
+  "ignorePaths": ["node_modules", "dist"]
+}
