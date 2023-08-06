@@ -11,6 +11,7 @@ import {
 import { RecurrenceRule, scheduleJob } from 'node-schedule';
 import * as clientCommands from '@/commands';
 import { Elysia, Ganyu } from '@/constants/fictionals'; // cspell:disable-line
+import { DEFAULT_PRESENCE } from '@/constants/presence';
 import { env } from '@/env';
 import * as clientEvents from '@/events/client';
 import * as playerEvents from '@/events/player';
@@ -32,10 +33,7 @@ export class Client extends DiscordClient {
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
       ],
-      presence: {
-        status: 'online',
-        activities: [{ name: "with Marviuz's ʞɔoɔ" }], // cspell:disable-line
-      },
+      presence: DEFAULT_PRESENCE,
     });
   }
 

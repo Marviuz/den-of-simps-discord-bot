@@ -5,7 +5,12 @@ import log from '@/utils/logger';
 export default new PlayerEvent('error', async (queue, error) => {
   log.error(error);
 
-  await queue.metadata.interaction.channel?.send({
-    embeds: [ErrorEmbed(error.message)],
-  });
+  try {
+    await queue.metadata.interaction.channel?.send({
+      embeds: [ErrorEmbed(error.message)],
+    });
+  } catch (err) {
+    // wtf even sending the error message errors!
+    log.error(err);
+  }
 });
