@@ -1,5 +1,15 @@
 # @marviuz/discord-bot
 
+## 2.5.0
+
+### Minor Changes
+
+- ac07371: Added presence update on music
+
+### Patch Changes
+
+- a2dfb93: fix env
+
 ## 2.4.0
 
 ### Minor Changes
